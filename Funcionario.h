@@ -1,10 +1,3 @@
-/*
- * Funcionario.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef FUNCIONARIO_H_
 #define FUNCIONARIO_H_
 

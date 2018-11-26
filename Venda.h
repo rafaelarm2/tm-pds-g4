@@ -1,10 +1,3 @@
-/*
- * Venda.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef VENDA_H_
 #define VENDA_H_
 

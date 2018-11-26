@@ -1,10 +1,3 @@
-/*
- * Cidade.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef CIDADE_H_
 #define CIDADE_H_
 

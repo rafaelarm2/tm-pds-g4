@@ -1,10 +1,3 @@
-/*
- * Cidade.cpp
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #include "Cidade.h"
 #include <string>
 

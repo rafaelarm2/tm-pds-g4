@@ -1,10 +1,3 @@
-/*
- * VendaEntrega.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef VENDAENTREGA_H_
 #define VENDAENTREGA_H_
 

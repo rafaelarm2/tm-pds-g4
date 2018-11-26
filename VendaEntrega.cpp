@@ -1,10 +1,3 @@
-/*
- * VendaEntrega.cpp
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #include "VendaEntrega.h"
 
 VendaEntrega::VendaEntrega(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario,

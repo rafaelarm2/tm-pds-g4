@@ -1,10 +1,3 @@
-/*
- * Endereco.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef ENDERECO_H_
 #define ENDERECO_H_
 

@@ -1,10 +1,3 @@
-/*
- * Endereco.cpp
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #include "Endereco.h"
 #include <string>
 

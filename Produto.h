@@ -1,10 +1,3 @@
-/*
- * Produto.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef PRODUTO_H_
 #define PRODUTO_H_
 

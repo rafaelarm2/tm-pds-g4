@@ -1,10 +1,3 @@
-/*
- * Cliente.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef CLIENTE_H_
 #define CLIENTE_H_
 

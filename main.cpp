@@ -34,7 +34,8 @@ void venda() {
 
 }
 
-void crud_produto() {
+void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf, ControladorProduto cp) {
+
 		std::cout << "CRUD PRODUTO"<< endl;
 		std::cout << "1. Inserir" << endl;
 		std::cout << "2. Listar" << endl;
@@ -50,7 +51,6 @@ void crud_produto() {
 
 		fflush(stdin);
 
-		ControladorProduto *cp = new ControladorProduto();
 		switch (item_menu) {
 		case 1: {
 			std::cout << "Nome: " << endl;
@@ -71,12 +71,12 @@ void crud_produto() {
 
 			Produto *p = new Produto(nome, atof(preco.c_str()), marca);
 
-			cp->inserirProduto(*p);
+			cp.inserirProduto(*p);
 
 		}break;
 
 		case 2: {
-			cp->listarProduto();
+			cp.listarProduto();
 
 		}break;
 
@@ -84,18 +84,18 @@ void crud_produto() {
 			int id;
 			std::cout << "Insira um id para busca: ";
 			scanf("%d", &id);
-			cp->buscarProduto(id);
+			cp.buscarProduto(id);
 		}break;
 
 		case 4: {
-			cp->listarProduto();
+			cp.listarProduto();
 			int id;
 			std::cout << "\nInsira um id para remover: ";
 			scanf("%d", &id);
-			cp->removerProduto(id);
+			cp.removerProduto(id);
 		} break;
 		case 5: {
-			cp->listarProduto();
+			cp.listarProduto();
 			int id;
 			std::cout << "\nInsira um id para alterar: ";
 			scanf("%d", &id);
@@ -118,7 +118,7 @@ void crud_produto() {
 
 			Produto *p = new Produto(nome, atof(preco.c_str()), marca);
 
-			cp->alterarProduto(id, *p);
+			cp.alterarProduto(id, *p);
 		}break;
 		case 6: {
 			printf("\n\n\n");
@@ -127,7 +127,7 @@ void crud_produto() {
 		}
 }
 
-void crud_cliente() {
+void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf, ControladorProduto cp) {
 		std::cout << "CRUD CLIENTE"<< endl;
 		std::cout << "1. Inserir" << endl;
 		std::cout << "2. Listar" << endl;
@@ -143,7 +143,6 @@ void crud_cliente() {
 
 		fflush(stdin);
 
-		ControladorCliente *cc = new ControladorCliente();
 		switch (item_menu) {
 		case 1: {
 			std::cout << "Nome: " << endl;
@@ -214,12 +213,12 @@ void crud_cliente() {
 			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);
 			Cliente *c = new Cliente(nome, cpf, email, *end, tel, dtcadastro, TipoCliente::BRONZE);
 
-			cc->inserirCliente(*c);
+			cc.inserirCliente(*c);
 
 		}break;
 
 		case 2: {
-			cc->listarCliente();
+			cc.listarCliente();
 
 		}break;
 
@@ -227,18 +226,18 @@ void crud_cliente() {
 			int id;
 			std::cout << "Insira um id para busca: ";
 			scanf("%d", &id);
-			cc->buscarCliente(id);
+			cc.buscarCliente(id);
 		}break;
 
 		case 4: {
-			cc->listarCliente();
+			cc.listarCliente();
 			int id;
 			std::cout << "\nInsira um id para remover: ";
 			scanf("%d", &id);
-			cc->removerCliente(id);
+			cc.removerCliente(id);
 		} break;
 		case 5: {
-			cc->listarCliente();
+			cc.listarCliente();
 			int id;
 			std::cout << "\nInsira um id para alterar o endereço: ";
 			scanf("%d", &id);
@@ -276,7 +275,7 @@ void crud_cliente() {
 
 
 			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);
-			cc->alterarCliente(id, *end);
+			cc.alterarCliente(id, *end);
 		}break;
 		case 6: {
 			printf("\n\n\n");

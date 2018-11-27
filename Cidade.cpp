@@ -1,7 +1,7 @@
 #include "Cidade.h"
 #include <string>
 
-Cidade::Cidade(std::string nome, Estado sgestado) {
+Cidade::Cidade(string nome, Estado sgestado) {
 	this->nome = nome;
 	this->sgestado = sgestado;
 
@@ -16,7 +16,26 @@ Cidade::~Cidade() {
 	// TODO Auto-generated destructor stub
 }
 
-std::string Cidade::getNome() {
+string Cidade::getNome() {
 	return this->nome;
 }
 
+int Cidade::getID(){
+	return this->id;
+}
+
+Estado Cidade::getEstado(){
+	return this->sgestado;
+}
+
+void Cidade::setNome(string nome_){
+	this->nome = nome_;
+}
+
+void Cidade::setID(int id_){
+	this->id = id_;
+}
+
+void Cidade::setEstado(Estado state){
+	this->sgestado = state;
+}

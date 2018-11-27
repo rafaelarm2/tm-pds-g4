@@ -12,14 +12,19 @@ enum Estado {
 class Cidade {
 private:
 	static int id;
-	std::string nome;
+	string nome;
 	Estado sgestado;
 public:
-	Cidade(std::string nome, Estado sgestado);
+	Cidade(string nome, Estado sgestado);
 	Cidade();
 	virtual ~Cidade();
 
-	std::string getNome();
-};
+	string getNome();
+	int getID();
+	Estado getEstado();
+
+	void setNome(string nome_);
+	void setID(int id_);
+	void setEstado(Estado state);
 
 #endif /* CIDADE_H_ */

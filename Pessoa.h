@@ -2,7 +2,6 @@
 #define PESSOA_H_
 
 #include <string>
-#include "Cidade.h"
 #include "Endereco.h"
 
 using namespace std;
@@ -11,12 +10,11 @@ class Pessoa {
 protected:
 	std::string nome;
 	std::string cpf;
-	std::string rg;
 	std::string email;
 	Endereco endereco;
 	std::string tel;
 public:
-	Pessoa(std::string nome, std::string cpf, std::string rg, std::string email, Endereco endereco, std::string tel);
+	Pessoa(std::string nome, std::string cpf, std::string email, Endereco endereco, std::string tel);
 	Pessoa();
 	virtual ~Pessoa();
 
@@ -24,3 +22,4 @@ public:
 };
 
 #endif /* PESSOA_H_ */
+

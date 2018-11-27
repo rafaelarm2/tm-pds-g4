@@ -28,6 +28,7 @@ void listarmenu() {
 	std::cout << "2. CRUD Produto" << endl;
 	std::cout << "3. CRUD Cliente" << endl;
 	std::cout << "4. CRUD Funcionario\n" << endl;
+	std::cout << "Ou aperte ESC para sair do programa\n" << endl;
 }
 
 void venda() {
@@ -539,10 +540,24 @@ bool checa_data(std::string str){
 int main() {
 	while(1){
 		int item_menu;
+		char opcao;
+		int opcao_int;
 		listarmenu();
 
 		std::cout << "Selecionar função: ";
-		scanf("%d", &item_menu);
+		scanf("%c", &opcao);
+
+		opcao_int = int(opcao);		
+			if (opcao_int == 27){
+				return 0;
+			}else if (opcao_int < 49 || opcao_int > 52){
+				throw SelecaoMenuInvalida();
+			}
+
+		item_menu = opcao_int - 48;
+
+		//scanf("%d", &item_menu);
+
 		switch (item_menu) {
 		case 1: {
 			// VENDA
@@ -557,11 +572,14 @@ int main() {
 			crud_produto();
 		}break;
 		case 3: {
+			//CRUD DE CLIENTE
 			printf("\n\n\n");
 			crud_cliente();
 		}break;
 		case 4: {
-
+			//CRUD DE FUNCIONARIO
+			printf("\n\n\n");
+			crud_funcionario();
 		}break;
 		default: {
 

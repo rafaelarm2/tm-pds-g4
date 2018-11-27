@@ -3,10 +3,10 @@
 
 using namespace std;
 
-Endereco::Endereco(Logradouro logradouro, std::string tipologradouro, std::string bairro, std::string cep, int num, std::string comp, Cidade cidade) {
+Endereco::Endereco(std::string logradouro, std::string bairro, std::string cep,
+		int num, std::string comp, std::string cidade) {
 	// TODO Auto-generated constructor stub
 	this->logradouro = logradouro;
-	this->tipologradouro = tipologradouro;
 	this->bairro = bairro;
 	this->cep = cep;
 	this->num = num;
@@ -22,7 +22,6 @@ Endereco::~Endereco() {
 	// TODO Auto-generated destructor stub
 }
 
-Cidade Endereco::getCidade() {
+std::string Endereco::getCidade() {
 	return this->cidade;
 }
-

@@ -304,14 +304,13 @@ bool checa_double(std::string str){
 		return true;
 }
 
-// Funcao checa data ja com as restricoes de dia. Ainda nao esta funcionando 100% 
-/*
 bool checa_data(std::string str){
     std::string::size_type sz;
     
     std::string dia;
     dia[0] = str[0];
     dia[1] = str[1];
+    dia[2] = '\0';
     
     try {
 		std::stod (dia, &sz);
@@ -326,6 +325,7 @@ bool checa_data(std::string str){
     std::string mes;
     mes[0] = str[3];
     mes[1] = str[4];
+    mes[2] = '\0';
     
     try {
 		std::stod (mes, &sz);
@@ -351,10 +351,6 @@ bool checa_data(std::string str){
 		return 0;
 	}
     int year = std::stod (ano, &sz);
-    
-    std::cout << day << std::endl;
-    std::cout << month << std::endl;
-    std::cout << year << std::endl;
     
     if ( (str[5] == '/') && (str[2] == '/') ){
         if( (day <= 31) && (day > 0) && ( (month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12) ) ){
@@ -375,62 +371,6 @@ bool checa_data(std::string str){
                 }
     }
     
-    else{ 
-        std::cout << "Formato de data invalido, por favor insira outro valor!" << std::endl;
-        return false;
-    }
-}
-*/
-bool checa_data(std::string str){
-    std::string::size_type sz;
-    
-    std::string dia;
-    dia[0] = str[0];
-    dia[1] = str[1];
-    
-    try {
-		std::stod (dia, &sz);
-	}
-	catch (const std::invalid_argument& ia){
-		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
-		return 0;
-	}
-    int day = std::stod (dia, &sz);
-    
-    
-    std::string mes;
-    mes[0] = str[3];
-    mes[1] = str[4];
-    
-    try {
-		std::stod (mes, &sz);
-	}
-	catch (const std::invalid_argument& ia){
-		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
-		return 0;
-	}
-    int month = std::stod (mes, &sz);
-    
-    
-    std::string ano;
-    ano[0] = str[6];
-    ano[1] = str[7];
-    ano[2] = str[8];
-    ano[3] = str[9];
-    
-    try {
-		std::stod (ano, &sz);
-	}
-	catch (const std::invalid_argument& ia){
-		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
-		return 0;
-	}
-    int year = std::stod (ano, &sz);
-    
-    if ( (str[5] == '/') && (str[2] == '/') ){
-        std::cout << "Formato de data valido, fique atento para as excecoes" << std::endl;
-        return true;
-    }
     else{ 
         std::cout << "Formato de data invalido, por favor insira outro valor!" << std::endl;
         return false;

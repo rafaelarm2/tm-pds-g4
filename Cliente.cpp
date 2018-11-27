@@ -24,6 +24,7 @@ Cliente::~Cliente() {
 	// TODO Auto-generated destructor stub
 }
 
+//gets
 Endereco Cliente::getEndereco() {
 	return this->endereco;
 }
@@ -50,4 +51,35 @@ std::string Cliente::getDtcadastro() {
 
 TipoCliente Cliente::getTipo() {
 	return this->tipo;
+}
+
+
+
+//sets
+void Cliente::setEndereco(Endereco endereco_) {
+	this->endereco = endereco_;
+}
+
+void Cliente::setNome(std::string nome_) {
+	this->nome = nome_;
+}
+
+void Cliente::setCpf(std::string cpf_) {
+	this->cpf = cpf_;
+}
+
+void Cliente::setEmail(std::string email_) {
+	this->email = email_;
+}
+
+void Cliente::setTel(std::string tel_) {
+	this->tel = tel_;
+}
+
+void Cliente::setDtcadastro(std::string dtcadastro_) {
+	this->dtcadastro = dtcadastro_;
+}
+
+void Cliente::setTipo(std::string tipo_){
+	this->tipo = tipo_;
 }

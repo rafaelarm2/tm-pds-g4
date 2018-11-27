@@ -28,7 +28,7 @@ public:
 	Cliente();
 	virtual ~Cliente();
 	int gerarId();
-
+//gets
 	Endereco getEndereco();
 	std::string getNome();
 	std::string getCpf();
@@ -37,6 +37,17 @@ public:
 
 	std::string getDtcadastro();
 	TipoCliente getTipo();
+
+//sets
+	void setEndereco(Endereco endereco_);
+	void setNome(std::string nome_);
+	void setCpf(std::string cpf_);
+	void setEmail(std::string email_);
+	void setTel(std::string tel_);
+
+	void setDtcadastro(std::string dtcadastro_);
+	void setTipo(TipoCliente tipo_);
+
 
 
 };

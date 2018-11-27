@@ -30,11 +30,72 @@ Venda::~Venda() {
 	// TODO Auto-generated destructor stub
 }
 
-double Venda::getVlfinal() {
-	return this->vlfinal;
-}
 
 void Venda::tenhofrete() {
 	std::cout << "Não tenho frete" << endl;
 
+}
+
+
+//gets
+int getID(){
+	return this->id;
+}
+
+std::string getDtcompra(){
+	return this->dtcompra;
+}
+
+std::list<Item> getItens(){
+	return this->itens;
+}
+
+Cliente getCliente(){
+	return this->cliente;
+}
+
+Funcionario getFuncionario(){
+	return this->funcionario;
+}
+
+double getVlliquido(){
+	return this->vlliquido;
+}
+
+int getDesconto(){
+	return this->desconto;
+}
+
+double Venda::getVlfinal() {
+	return this->vlfinal;
+}
+
+
+//sets
+void setDtcompra(std::string dtcompra_){
+	this->dtcompra = dtcompra_;
+}
+
+void setItens(std::list<Item> itens_){
+	this->itens = itens_;
+}
+
+void setCliente(Cliente cliente_){
+	this->cliente = cliente_;
+}
+
+void setFuncionario(Funcionario funcionario_){
+	this->funcionario = funcionario_;
+}
+
+void setVlliquido(double vlliquido_){
+	this->vlliquido = vlliquido_;
+}
+
+void setDesconto(int desconto_){
+	this->desconto = desconto_;
+}
+
+void setVlfinal(double vlfinal_){
+	this->vlfinal = vlfinal_;
 }

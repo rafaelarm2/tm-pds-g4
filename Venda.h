@@ -12,7 +12,7 @@ using namespace std;
 
 class Venda {
 protected:
-	static int id;
+	int id;
 	std::string dtcompra;
 	std::list<Item> itens;
 	Cliente cliente;
@@ -25,8 +25,26 @@ public:
 	Venda(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario, int desconto);
 	virtual ~Venda();
 
-	double getVlfinal();
 	void tenhofrete();
+
+//gets
+	int getID();
+	std::string getDtcompra();
+	std::list<Item> getItens();
+	Cliente getCliente();
+	Funcionario getFuncionario();
+	double getVlliquido();
+	int getDesconto();
+	double getVlfinal();
+
+//sets
+	void setDtcompra(std::string dtcompra_);
+	void setItens(std::list<Item> itens_);
+	void setCliente(Cliente cliente_);
+	void setFuncionario(Funcionario funcionario_);
+	void setVlliquido(double vlliquido_);
+	void setDesconto(int desconto_);
+	void setVlfinal(double vlfinal_);
 };
 
 #endif /* VENDA_H_ */

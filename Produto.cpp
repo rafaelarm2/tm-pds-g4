@@ -24,6 +24,13 @@ Produto::~Produto() {
 	// TODO Auto-generated destructor stub
 }
 
+
+
+//gets
+int getID(){
+	return this->id;
+}
+
 double Produto::getPreco() {
 	return this->preco;
 }
@@ -34,4 +41,22 @@ std::string Produto::getMarca() {
 
 std::string Produto::getNome() {
 	return this->nome;
+}
+
+
+//sets
+void setID(int id_){
+	this->
+}
+
+void setNome(std::string nome_){
+	this->nome = nome_;
+}
+
+void setPreco(double preco_){
+	this->preco = preco_;
+}
+
+void setMarca(std::string marca_){
+	this->marca = marca_;
 }

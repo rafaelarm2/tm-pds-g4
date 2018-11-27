@@ -1,3 +1,10 @@
+/*
+ * Cliente.h
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #ifndef CLIENTE_H_
 #define CLIENTE_H_
 
@@ -20,8 +27,16 @@ public:
 			std::string dtcadastro, TipoCliente tipo);
 	Cliente();
 	virtual ~Cliente();
+	int gerarId();
 
 	Endereco getEndereco();
+	std::string getNome();
+	std::string getCpf();
+	std::string getEmail();
+	std::string getTel();
+
+	std::string getDtcadastro();
+	TipoCliente getTipo();
 
 
 };

@@ -285,6 +285,26 @@ void crud_cliente() {
 		}
 }
 
+bool checa_double(std::string str){
+	std::string::size_type sz;     // alias of size_t
+	
+	try {
+		std::stod (str, &sz);
+	}
+	catch (const std::invalid_argument& ia){
+		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
+		return 0;
+	}
+	double valor = std::stod (str, &sz); 
+	
+	int valor_em_inteiro = int(valor);
+	
+	if ((valor / valor_em_inteiro) == 1)
+		return false;	
+	else 
+		return true;
+}
+
 int main() {
 	while(1){
 		int item_menu;

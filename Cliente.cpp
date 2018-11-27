@@ -53,6 +53,9 @@ TipoCliente Cliente::getTipo() {
 	return this->tipo;
 }
 
+int Cliente::getID(){
+	return this->id;
+}
 
 
 //sets
@@ -82,4 +85,8 @@ void Cliente::setDtcadastro(std::string dtcadastro_) {
 
 void Cliente::setTipo(std::string tipo_){
 	this->tipo = tipo_;
+}
+
+void Cliente::setID(int id_){
+	this->id = id_;
 }

@@ -37,6 +37,7 @@ public:
 
 	std::string getDtcadastro();
 	TipoCliente getTipo();
+	int getID();
 
 //sets
 	void setEndereco(Endereco endereco_);
@@ -47,6 +48,7 @@ public:
 
 	void setDtcadastro(std::string dtcadastro_);
 	void setTipo(TipoCliente tipo_);
+	void setID(int id_);
 
 
 

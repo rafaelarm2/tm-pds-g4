@@ -4,11 +4,10 @@
 
 using namespace std;
 
-Pessoa::Pessoa(std::string nome, std::string cpf, std::string rg, std::string email, Endereco endereco,
+Pessoa::Pessoa(std::string nome, std::string cpf, std::string email, Endereco endereco,
 		std::string tel) {
 	this->nome = nome;
 	this->cpf = cpf;
-	this->rg = rg;
 	this->email = email;
 	this->endereco = endereco;
 	this->tel = tel;

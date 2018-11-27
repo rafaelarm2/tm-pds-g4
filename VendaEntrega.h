@@ -8,17 +8,20 @@
 
 using namespace std;
 
+enum StatusEntrega {
+	PENDENTE, ATRASADA, ENTREGUE
+};
 
 class VendaEntrega: public Venda {
 private:
 	Endereco endereco;
 	std::string dtentrega;
+	StatusEntrega status;
 	double frete;
 	double vlfinalcomfrete;
-	std::string observacoes;
 public:
 	VendaEntrega(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario, int desconto,
-			Endereco endereco, std::string dtentrega, double frete, std::string observacoes);
+			Endereco endereco, std::string dtentrega, double frete, StatusEntrega status);
 	VendaEntrega();
 	virtual ~VendaEntrega();
 
@@ -28,3 +31,4 @@ public:
 };
 
 #endif /* VENDAENTREGA_H_ */
+

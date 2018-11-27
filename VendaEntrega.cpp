@@ -1,13 +1,13 @@
 #include "VendaEntrega.h"
 
 VendaEntrega::VendaEntrega(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario,
-		int desconto, Endereco endereco, std::string dtentrega, double frete, std::string observacoes):
+		int desconto, Endereco endereco, std::string dtentrega, double frete, StatusEntrega status):
 		Venda(dtcompra, itens, cliente, funcionario, desconto) {
 	// TODO Auto-generated constructor stub
 	this->endereco = endereco;
 	this->dtentrega = dtentrega;
 	this->frete = frete;
-	this->observacoes = observacoes;
+	this->status = status;
 	this->vlfinalcomfrete = this->getVlfinal() + frete;
 
 }
@@ -28,4 +28,3 @@ void VendaEntrega::tenhofrete() {
 	std::cout << "Tenho frete" << endl;
 
 }
-

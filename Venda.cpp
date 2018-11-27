@@ -38,31 +38,31 @@ void Venda::tenhofrete() {
 
 
 //gets
-int getID(){
+int Venda::getID(){
 	return this->id;
 }
 
-std::string getDtcompra(){
+std::string Venda::getDtcompra(){
 	return this->dtcompra;
 }
 
-std::list<Item> getItens(){
+std::list<Item> Venda::getItens(){
 	return this->itens;
 }
 
-Cliente getCliente(){
+Cliente Venda::getCliente(){
 	return this->cliente;
 }
 
-Funcionario getFuncionario(){
+Funcionario Venda::getFuncionario(){
 	return this->funcionario;
 }
 
-double getVlliquido(){
+double Venda::getVlliquido(){
 	return this->vlliquido;
 }
 
-int getDesconto(){
+int Venda::getDesconto(){
 	return this->desconto;
 }
 
@@ -72,30 +72,30 @@ double Venda::getVlfinal() {
 
 
 //sets
-void setDtcompra(std::string dtcompra_){
+void Venda::setDtcompra(std::string dtcompra_){
 	this->dtcompra = dtcompra_;
 }
 
-void setItens(std::list<Item> itens_){
+void Venda::setItens(std::list<Item> itens_){
 	this->itens = itens_;
 }
 
-void setCliente(Cliente cliente_){
+void Venda::setCliente(Cliente cliente_){
 	this->cliente = cliente_;
 }
 
-void setFuncionario(Funcionario funcionario_){
+void Venda::setFuncionario(Funcionario funcionario_){
 	this->funcionario = funcionario_;
 }
 
-void setVlliquido(double vlliquido_){
+void Venda::setVlliquido(double vlliquido_){
 	this->vlliquido = vlliquido_;
 }
 
-void setDesconto(int desconto_){
+void Venda::setDesconto(int desconto_){
 	this->desconto = desconto_;
 }
 
-void setVlfinal(double vlfinal_){
+void Venda::setVlfinal(double vlfinal_){
 	this->vlfinal = vlfinal_;
 }

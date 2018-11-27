@@ -25,9 +25,37 @@ public:
 	VendaEntrega();
 	virtual ~VendaEntrega();
 
-	double getVlfinal();
-	double getVlfinalcomfrete();
 	void tenhofrete();
+
+//gets
+	int getID();
+	std::string getDtcompra();
+	std::list<Item> getItens();
+	Cliente getCliente();
+	Funcionario getFuncionario();
+	double getVlliquido();
+	int getDesconto();
+	double getVlfinal();
+
+	Endereco getEndereco();
+	std::string getDtentrega();
+	StatusEntrega getStatus();
+	double getFrete();
+	double getVlfinalcomfrete();
+
+//sets
+	void setDtcompra(std::string dtcompra_);
+	void setItens(std::list<Item> itens_);
+	void setCliente(Cliente cliente_);
+	void setFuncionario(Funcionario funcionario_);
+	void setVlliquido(double vlliquido_);
+	void setDesconto(int desconto_);
+	void setVlfinal(double vlfinal_);
+
+	void setEndereco(Endereco endereco_);
+	void setDtentrega(std::string dtentrega_);
+	void setStatus(StatusEntrega status_);
+	void setFrete(double frete_);
 };
 
 #endif /* VENDAENTREGA_H_ */

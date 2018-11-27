@@ -17,9 +17,17 @@ public:
 	Produto();
 	virtual ~Produto();
 
-	double getPreco();
+//gets
+	int getID();
 	std::string getNome();
+	double getPreco();
 	std::string getMarca();
+
+//sets
+	void setID(int id_);
+	void setNome(std::string nome_);
+	void setPreco(double preco_);
+	void setMarca(std::string marca_);	
 };
 
 #endif /* PRODUTO_H_ */

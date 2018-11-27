@@ -80,9 +80,9 @@ void Funcionario::setTel(std::string tel_) {
 }
 
 
-void Funcionario::setID(int id_){
-	this->id = id_;
-}
+// void Funcionario::setID(int id_){
+// 	this->id = id_;
+// }
 
 void Funcionario::setDtadmissao(std::string dtadmissao_) {
 	this->dtadmissao = dtadmissao_;

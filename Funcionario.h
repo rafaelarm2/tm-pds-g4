@@ -37,7 +37,7 @@ public:
 	void setEmail(std::string email_);
 	void setTel(std::string tel_);
 
-	void setID(int id_);
+	//void setID(int id_);
 	void setDtadmissao(std::string dtadmissao_);
 	void setDtdemissao(std::string dtdemissao_);
 };

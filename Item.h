@@ -16,7 +16,17 @@ public:
 	Item(Produto produto, int qtd);
 	virtual ~Item();
 
+//gets
+	int getID();
+	Produto getProduto();
+	int getQtd();
 	double getVltotal();
+
+//sets
+	void setID(int id_);
+	void setProduto(Produto produto_);
+	void setQtd(int qtd_);
+	void setVltotal(double vltotal_);
 
 };
 

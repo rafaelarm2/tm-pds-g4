@@ -35,9 +35,9 @@ public:
 	std::string getEmail();
 	std::string getTel();
 
+	int getID();
 	std::string getDtcadastro();
 	TipoCliente getTipo();
-	int getID();
 
 //sets
 	void setEndereco(Endereco endereco_);
@@ -46,12 +46,9 @@ public:
 	void setEmail(std::string email_);
 	void setTel(std::string tel_);
 
+	void setID(int id_);
 	void setDtcadastro(std::string dtcadastro_);
 	void setTipo(TipoCliente tipo_);
-	void setID(int id_);
-
-
-
 };
 
 #endif /* CLIENTE_H_ */

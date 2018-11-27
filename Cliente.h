@@ -16,7 +16,7 @@ protected:
 	std::string dtcadastro;
 	TipoCliente tipo;
 public:
-	Cliente(std::string nome, std::string cpf, std::string rg, std::string email, Endereco endereco, std::string tel,
+	Cliente(std::string nome, std::string cpf, std::string email, Endereco endereco, std::string tel,
 			std::string dtcadastro, TipoCliente tipo);
 	Cliente();
 	virtual ~Cliente();

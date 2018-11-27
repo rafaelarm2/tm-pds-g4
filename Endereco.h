@@ -2,32 +2,26 @@
 #define ENDERECO_H_
 
 #include <string>
-#include "Cidade.h"
 #include "Endereco.h"
 
 using namespace std;
 
-enum Logradouro {
-	Rua, Avenida, Alameda, Condominio, Rodovia, Vila, Viela
-};
-
 class Endereco {
 private:
-	static int id;
-	Logradouro logradouro;
-	std::string tipologradouro; //Enum
+	int id;
+	std::string logradouro;
 	std::string bairro;
 	std::string cep;
 	int num;
 	std::string comp;
-	Cidade cidade;
+	std::string cidade;
 public:
-	Endereco(Logradouro logradouro, std::string tipologradouro, std::string bairro, std::string cep, int num,
-			std::string comp, Cidade cidade);
+	Endereco(std::string logradouro, std::string bairro, std::string cep, int num,
+			std::string comp, std::string cidade);
 	Endereco();
 	virtual ~Endereco();
 
-	Cidade getCidade();
+	std::string getCidade();
 };
 
 #endif /* ENDERECO_H_ */

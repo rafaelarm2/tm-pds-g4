@@ -7,16 +7,20 @@ using namespace std;
 
 class Produto {
 private:
-	static int id;
+	int id;
 	std::string nome;
 	double preco;
 	std::string marca;
 public:
 	Produto(std::string nome, double preco, std::string marca);
+	Produto(int id, std::string nome, double preco, std::string marca);
 	Produto();
 	virtual ~Produto();
 
 	double getPreco();
+	std::string getNome();
+	std::string getMarca();
 };
 
 #endif /* PRODUTO_H_ */
+

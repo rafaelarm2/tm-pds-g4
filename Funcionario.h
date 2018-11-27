@@ -10,13 +10,11 @@ using namespace std;
 class Funcionario: public Pessoa{
 protected:
 	static int id;
-	std::string usuario;
-	std::string senha;
 	std::string dtadmissao;
 	std::string dtdemissao;
 public:
-	Funcionario(std::string nome, std::string cpf, std::string rg, std::string email, Endereco endereco,
-			std::string tel, std::string usuario, std::string senha, std::string dtadmissao, std::string dtdemissao);
+	Funcionario(std::string nome, std::string cpf, std::string email, Endereco endereco,
+			std::string tel, std::string dtadmissao, std::string dtdemissao);
 	Funcionario();
 	virtual ~Funcionario();
 };

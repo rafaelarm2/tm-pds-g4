@@ -17,7 +17,7 @@ public:
 
 	void inserirCliente(Cliente c);
 	void listarCliente();
-	void buscarCliente(int id);
+	Cliente buscarCliente(int id);
 	void removerCliente(int id);
 	void alterarCliente(int id, Endereco end);
 };

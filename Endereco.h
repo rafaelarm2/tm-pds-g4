@@ -1,3 +1,10 @@
+/*
+ * Endereco.h
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #ifndef ENDERECO_H_
 #define ENDERECO_H_
 
@@ -21,23 +28,12 @@ public:
 	Endereco();
 	virtual ~Endereco();
 
-//gets
-	int getID();
 	std::string getLogradouro();
 	std::string getBairro();
 	std::string getCep();
 	int getNum();
 	std::string getComp();
 	std::string getCidade();
-
-//sets
-	void setID(int id_);
-	void setLogradouro(std::string logradouro_);
-	void setBairro(std::string bairro_);
-	void setCep(std::string cep_);
-	void setNum(int num_);
-	void setComp(std::string comp_);
-	void setCidade(std::string cidade_s);
 };
 
 #endif /* ENDERECO_H_ */

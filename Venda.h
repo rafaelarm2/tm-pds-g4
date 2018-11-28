@@ -1,3 +1,10 @@
+/*
+ * Venda.h
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #ifndef VENDA_H_
 #define VENDA_H_
 
@@ -24,10 +31,10 @@ protected:
 public:
 	Venda(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario, int desconto);
 	virtual ~Venda();
-
 	void tenhofrete();
 
-//gets
+
+	double getVlfinal();
 	int getID();
 	std::string getDtcompra();
 	std::list<Item> getItens();
@@ -35,9 +42,7 @@ public:
 	Funcionario getFuncionario();
 	double getVlliquido();
 	int getDesconto();
-	double getVlfinal();
 
-//sets
 	void setDtcompra(std::string dtcompra_);
 	void setItens(std::list<Item> itens_);
 	void setCliente(Cliente cliente_);

@@ -17,9 +17,12 @@ public:
 
 	void inserirProduto(Produto p);
 	void listarProduto();
-	void buscarProduto(int id);
+	Produto buscarProduto(int id);
 	void removerProduto(int id);
 	void alterarProduto(int id, Produto p);
+
+	void saidaProduto(int id, int estoque, int qtd);
+	void entradaProduto(int id, int qtd);
 };
 
 #endif /* CONTROLADORPRODUTO_H_ */

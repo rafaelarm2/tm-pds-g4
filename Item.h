@@ -1,3 +1,10 @@
+/*
+ * Item.h
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #ifndef ITEM_H_
 #define ITEM_H_
 
@@ -8,7 +15,7 @@ using namespace std;
 
 class Item {
 private:
-	static int id;
+	int id;
 	Produto produto;
 	int qtd;
 	double vltotal;
@@ -16,13 +23,13 @@ public:
 	Item(Produto produto, int qtd);
 	virtual ~Item();
 
-//gets
+	//gets
 	int getID();
 	Produto getProduto();
 	int getQtd();
 	double getVltotal();
 
-//sets
+	//sets
 	void setID(int id_);
 	void setProduto(Produto produto_);
 	void setQtd(int qtd_);

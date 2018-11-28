@@ -1,3 +1,10 @@
+/*
+ * Endereco.cpp
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #include "Endereco.h"
 #include <string>
 
@@ -22,61 +29,27 @@ Endereco::~Endereco() {
 	// TODO Auto-generated destructor stub
 }
 
-
-//gets
-int Endereco::getID(){
-	return this->id;
-}
-
-std::string Endereco::getLogradouro(){
-	return this->logradouro;
-}
-
-std::string Endereco::getBairro(){
-	return this->bairro;
-}
-
-std::string Endereco::getCep(){
-	return this->cep;
-}
-
-int Endereco::getNum(){
-	return this->num;
-}
-
-std::string Endereco::getComp(){
-	return this->comp;
-}
-
 std::string Endereco::getCidade() {
 	return this->cidade;
 }
 
-//sets
-void Endereco::setID(int id_){
-	this->id = id_;
+std::string Endereco::getLogradouro() {
+	return this->logradouro;
 }
 
-void Endereco::setLogradouro(std::string logradouro_){
-	this->logradouro = logradouro_;
+std::string Endereco::getBairro() {
+	return this->bairro;
 }
 
-void Endereco::setBairro(std::string bairro_){
-	this->bairro = bairro_;
+std::string Endereco::getCep() {
+	return this->cep;
 }
 
-void Endereco::setCep(std::string cep_){
-	this->cep = cep_;
+int Endereco::getNum() {
+	return this->num;
 }
 
-void Endereco::setNum(int num_){
-	this->num = num_;
+std::string Endereco::getComp() {
+	return this->comp;
 }
 
-void Endereco::setComp(std::string comp_){
-	this->comp = comp_;
-}
-
-void Endereco::setCidade(std::string cidade_){
-	this->cidade = cidade_;
-}

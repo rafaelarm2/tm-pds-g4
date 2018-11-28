@@ -1,3 +1,10 @@
+/*
+ * Item.cpp
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #include "Item.h"
 #include <string>
 
@@ -12,7 +19,6 @@ Item::Item(Produto produto, int qtd) {
 Item::~Item() {
 	// TODO Auto-generated destructor stub
 }
-
 
 //gets
 int Item::getID(){
@@ -48,4 +54,3 @@ void Item::setQtd(int qtd_){
 void Item::setVltotal(double vltotal_){
 	this->vltotal = vltotal_;
 }
-

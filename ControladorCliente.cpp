@@ -117,12 +117,15 @@ void ControladorCliente::listarCliente() {
 
 }
 
-void ControladorCliente::buscarCliente(int id) {
+Cliente ControladorCliente::buscarCliente(int id) {
 	sqlite3 *db;
 	sqlite3_stmt * stmt;
 	int rc;
 	std::string str;
 	std::stringstream ss;
+
+	Endereco *end;
+	Cliente *c;
 
 	if (sqlite3_open("db", &db) == SQLITE_OK) {
 		ss << "SELECT idcliente, nmcliente, cpf, email, tel, dtcadastro, tipo, logradouro, bairro, cep, num, comp, cidade FROM tbcliente, tbendereco WHERE tbcliente.idendereco = tbendereco.idendereco and idcliente = " << id;
@@ -151,6 +154,15 @@ void ControladorCliente::buscarCliente(int id) {
 			std::cout << idcliente << " " << nmcliente << " " << cpf << " " << email << " " << tel << " "
 					<< dtcadastro << " " << tipo << " " << logradouro << " " << bairro << " " << cep << " "
 					<< num << " " << comp << " " << cidade << endl;
+			TipoCliente tc;
+			if (tipo == "1") tc = TipoCliente::BRONZE;
+			if (tipo == "2") tc = TipoCliente::PRATA;
+			if (tipo == "3") tc = TipoCliente::OURO;
+			if (tipo == "4") tc = TipoCliente::DIAMANTE;
+
+			end = new Endereco(logradouro, bairro, cep, num, comp, cidade);
+			c = new Cliente(idcliente, nmcliente, cpf, email, *end, tel, dtcadastro, tc);
+
 		}
 
 	} else {
@@ -159,7 +171,10 @@ void ControladorCliente::buscarCliente(int id) {
 
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
+
+	return (*c);
 }
+
 
 
 void ControladorCliente::removerCliente(int id) {

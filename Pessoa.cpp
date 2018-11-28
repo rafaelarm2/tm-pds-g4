@@ -1,3 +1,10 @@
+/*
+ * Funcionario.cpp
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #include "Pessoa.h"
 #include "Endereco.h"
 #include <string>
@@ -23,5 +30,21 @@ Pessoa::~Pessoa() {
 
 Endereco Pessoa::getEndereco() {
 	return this->endereco;
+}
+
+std::string Pessoa::getNome() {
+	return this->nome;
+}
+
+std::string Pessoa::getCpf() {
+	return this->cpf;
+}
+
+std::string Pessoa::getEmail() {
+	return this->email;
+}
+
+std::string Pessoa::getTel() {
+	return this->tel;
 }
 

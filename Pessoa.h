@@ -1,3 +1,10 @@
+/*
+ * Funcionario.h
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #ifndef PESSOA_H_
 #define PESSOA_H_
 
@@ -19,7 +26,10 @@ public:
 	virtual ~Pessoa();
 
 	Endereco getEndereco();
+	std::string getNome();
+	std::string getCpf();
+	std::string getEmail();
+	std::string getTel();
 };
 
 #endif /* PESSOA_H_ */
-

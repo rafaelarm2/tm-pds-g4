@@ -1,5 +1,19 @@
+/*
+ * Produto.cpp
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
 
 #include "Produto.h"
+
+Produto::Produto(std::string nome, double preco, std::string marca, int estoque) {
+	// TODO Auto-generated constructor stub
+	this->nome = nome;
+	this->preco = preco;
+	this->marca = marca;
+	this->estoque = estoque;
+}
 
 Produto::Produto(std::string nome, double preco, std::string marca) {
 	// TODO Auto-generated constructor stub
@@ -8,12 +22,13 @@ Produto::Produto(std::string nome, double preco, std::string marca) {
 	this->marca = marca;
 }
 
-Produto::Produto(int id, std::string nome, double preco, std::string marca) {
+Produto::Produto(int id, std::string nome, double preco, std::string marca, int estoque) {
 	// TODO Auto-generated constructor stub
 	this->nome = nome;
 	this->preco = preco;
 	this->marca = marca;
 	this->id = id;
+	this->estoque = estoque;
 }
 
 Produto::Produto(){ // @suppress("Class members should be properly initialized")
@@ -24,10 +39,8 @@ Produto::~Produto() {
 	// TODO Auto-generated destructor stub
 }
 
-
-
 //gets
-int getID(){
+int Produto::getID(){
 	return this->id;
 }
 
@@ -43,20 +56,35 @@ std::string Produto::getNome() {
 	return this->nome;
 }
 
-
-//sets
-void setID(int id_){
-	this->
+int Produto::getEstoque(){
+	return this->estoque;
 }
 
-void setNome(std::string nome_){
+//sets
+void Produto::setID(int id_){
+	this->id = id_;
+}
+
+void Produto::setNome(std::string nome_){
 	this->nome = nome_;
 }
 
-void setPreco(double preco_){
+void Produto::setPreco(double preco_){
 	this->preco = preco_;
 }
 
-void setMarca(std::string marca_){
+void Produto::setMarca(std::string marca_){
 	this->marca = marca_;
+}
+
+void Produto::setEstoque(int estoque_){
+	this->estoque = estoque_;
+}
+
+void Produto::saidaProduto(int qtd) {
+	if (this->estoque - qtd >= 0) {
+		this->estoque = this->estoque - qtd;
+	}
+
+
 }

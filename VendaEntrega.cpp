@@ -1,11 +1,17 @@
+/*
+ * VendaEntrega.cpp
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
 #include "VendaEntrega.h"
 
 VendaEntrega::VendaEntrega(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario,
-		int desconto, Endereco endereco, std::string dtentrega, double frete, StatusEntrega status):
+		int desconto, Endereco endereco, double frete, StatusEntrega status):
 		Venda(dtcompra, itens, cliente, funcionario, desconto) {
 	// TODO Auto-generated constructor stub
 	this->endereco = endereco;
-	this->dtentrega = dtentrega;
 	this->frete = frete;
 	this->status = status;
 	this->vlfinalcomfrete = this->getVlfinal() + frete;
@@ -15,13 +21,6 @@ VendaEntrega::VendaEntrega(std::string dtcompra, std::list<Item> itens, Cliente 
 VendaEntrega::~VendaEntrega() {
 	// TODO Auto-generated destructor stub
 }
-
-
-void VendaEntrega::tenhofrete() {
-	std::cout << "Tenho frete" << endl;
-
-}
-
 
 //gets
 int VendaEntrega::getID(){
@@ -124,3 +123,4 @@ void VendaEntrega::setStatus(StatusEntrega status_){
 void VendaEntrega::setFrete(double frete_){
 	this->frete = frete_;
 }
+

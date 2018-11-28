@@ -1,3 +1,11 @@
+/*
+ * Venda.cpp
+ *
+ *  Created on: 25 de nov de 2018
+ *      Author: rafaelamoreira
+ */
+
+
 #include <list>
 #include <iostream>
 #include "Venda.h"
@@ -35,7 +43,6 @@ void Venda::tenhofrete() {
 	std::cout << "Não tenho frete" << endl;
 
 }
-
 
 //gets
 int Venda::getID(){

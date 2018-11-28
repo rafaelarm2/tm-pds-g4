@@ -50,6 +50,18 @@ bool checa_double(std::string str){
 		return true;
 }
 
+std::string numero_valido(std::string numero_com_virgula){
+    std::string str = numero_com_virgula;
+    int num = numero_com_virgula.length();  //(unsigned)strlen(szInput))
+    
+    for (unsigned int i = 0; i < num; i++){  
+        if(str[i] == ',')
+            str[i] = '.';
+    }
+    
+    return str;
+}
+
 void listarmenu() {
 	std::cout << "Menu"<< endl;
 	std::cout << "1. Venda" << endl;

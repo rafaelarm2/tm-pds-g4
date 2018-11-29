@@ -1055,7 +1055,295 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	}
 }
 
+void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf, ControladorProduto cp) {
+	std::cout << "CRUD FUNCIONARIO"<< endl;
+	std::cout << "1. Inserir" << endl;
+	std::cout << "2. Listar" << endl;
+	std::cout << "3. Buscar" << endl;
+	std::cout << "4. Remover" << endl;
+	std::cout << "5. Alterar" << endl;
+	std::cout << "6. Voltar" << endl;
 
+	//LEITURA DO MENU COM RESTRIÇÃO
+	std::cout << "Selecione uma funcionalidade: ";
+	std::string strmenu;
+	int menu;
+
+	do {
+		std::getline(std::cin, strmenu);
+
+		try {
+			menu = stoi(strmenu.c_str());
+		} catch (...){
+			menu = 0;
+		}
+
+		if (menu <= 0 || menu > 6) {
+			std::cout << "Inválido. Selecione novamente: ";
+		}
+
+	} while (menu <= 0 || menu > 6);
+
+
+	fflush(stdin);
+
+	switch (menu) {
+	case 1: {
+		std::cout << "\nINSERIR NOVO FUNCIONARIO\n" << endl;
+
+		std::cout << "Nome: ";
+		std::string nome;
+		std::getline(std::cin, nome);
+
+		std::cout << "CPF: ";
+		std::string cpf;
+		std::getline(std::cin, cpf);
+
+		std::cout << "Email: ";
+		std::string email;
+		std::getline(std::cin, email);
+
+		std::cout << "Tel: ";
+		std::string tel;
+		std::getline(std::cin, tel);
+		
+		std::cout << "Data de admissao: ";
+		std::string dtadmissao;
+		std::getline(std::cin, dtadmissao);
+		
+		std::cout << "Data de demissao: ";
+		std::string dtdemissao;
+		std::getline(std::cin, dtdemissao);
+
+		//DATA DE CADASTRO
+		time_t timer;
+		struct tm *horarioLocal;
+		time(&timer); // Obtem informações de data e hora
+		horarioLocal = localtime(&timer); // Converte a hora atual para a hora local
+		int dia = horarioLocal->tm_mday;
+		int mes = horarioLocal->tm_mon + 1;
+		int ano = horarioLocal->tm_year + 1900;
+		std::stringstream ss;
+		ss << dia << "/" << mes << "/"<< ano;
+		std::string dtcadastro = ss.str();
+
+		std::cout << "Logradouro: ";
+		std::string logradouro;
+		std::getline(std::cin, logradouro);
+
+		std::cout << "Bairro: ";
+		std::string bairro;
+		std::getline(std::cin, bairro);
+
+		std::cout << "Num: ";
+		int num;
+		std::string numstr;
+
+
+		//LEITURA DO NUMERO COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, numstr);
+
+			try {
+				num = stoi(numstr.c_str());
+			} catch (...){
+				num = 0;
+			}
+
+			if (num <= 0) {
+				std::cout << "Inválido. Insira o número novamente: ";
+			}
+
+		} while (num <= 0);
+
+		std::cout << "CEP: ";
+		std::string cep;
+		std::getline(std::cin, cep);
+
+		std::cout << "Complemento: ";
+		std::string comp;
+		std::getline(std::cin, comp);
+
+		std::cout << "Cidade: ";
+		std::string cidade;
+		std::getline(std::cin, cidade);
+
+		Endereco *end = new Endereco(logradouro, bairro, cep, num, comp, cidade);
+		Funcionario *f = new Funcionario(nome, cpf, email, *end, tel,  dtadmissao, dtdemissao);
+
+		cc.inserirFuncionario(*f);
+
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cc.listarFuncionario();
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+
+	} break;
+
+	case 2: {
+
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cc.listarFuncionario();
+
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+
+
+	}break;
+
+	case 3: {
+
+		std::cout << "\nBUSCA DE FUNCIONARIOS" << endl;
+		std::string idstr;
+		int id;
+		std::cout << "\nInsira o ID desejado para buscar: ";
+		//LEITURA DO ID COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, idstr);
+
+			try {
+				id = stoi(idstr.c_str());
+			} catch (...){
+				id = -1;
+			}
+
+			if (id < 0) {
+				std::cout << "Inválido. Insira o ID novamente: ";
+			}
+
+		} while (id < 0);
+
+		if(cc.idExiste(id)) {
+			cc.buscarFuncionario(id);
+		} else {
+			std::cout << "ID não existe." << endl;
+		}
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+
+	}break;
+
+	case 4: {
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cc.listarFuncionario();
+		std::string idstr;
+		int id;
+		std::cout << "\nInsira o ID desejado para remover: ";
+		//LEITURA DO ID COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, idstr);
+
+			try {
+				id = stoi(idstr.c_str());
+			} catch (...){
+				id = -1;
+			}
+
+			if (id < 0) {
+				std::cout << "Inválido. Insira o ID novamente: ";
+			}
+
+		} while (id < 0);
+
+		if(cc.idExiste(id)) {
+			cc.removerFuncionario(id);
+		} else {
+			std::cout << "\nErro: ID não encontrado." << endl;
+		}
+
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cc.listarFuncionario();
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+	} break;
+	case 5: {
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cc.listarFuncionario();
+		std::string idstr;
+		int id;
+		std::cout << "\nInsira o ID desejado para alterar: ";
+		//LEITURA DO ID COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, idstr);
+
+			try {
+				id = stoi(idstr.c_str());
+			} catch (...){
+				id = -1;
+			}
+
+			if (id < 0) {
+				std::cout << "Inválido. Insira o ID novamente: ";
+			}
+
+		} while (id < 0);
+
+
+		if(cc.idExiste(id)) {
+			std::cout << "Novo logradouro: ";
+			std::string logradouro;
+			std::getline(std::cin, logradouro);
+
+			std::cout << "Novo bairro: ";
+			std::string bairro;
+			std::getline(std::cin, bairro);
+
+			std::cout << "Novo numero: ";
+			int num;
+			std::string numstr;
+
+
+			//LEITURA DO NUMERO COM RESTRIÇÃO
+			do {
+				std::getline(std::cin, numstr);
+
+				try {
+					num = stoi(numstr.c_str());
+				} catch (...){
+					num = 0;
+				}
+
+				if (num <= 0) {
+					std::cout << "Invalido. Insira o numero novamente: ";
+				}
+
+			} while (num <= 0);
+
+			std::cout << "Novo CEP: ";
+			std::string cep;
+			std::getline(std::cin, cep);
+
+			std::cout << "Novo complemento: ";
+			std::string comp;
+			std::getline(std::cin, comp);
+
+			std::cout << "Nova cidade: ";
+			std::string cidade;
+			std::getline(std::cin, cidade);
+
+
+			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);
+			cc.alterarFuncionario(id, *end);
+
+			std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+			cc.listarFuncionario();
+		} else {
+			std::cout << "\nErro: ID não encontrado." << endl;
+		}
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+	}break;
+	case 6: {
+		printf("\n\n");
+		return;
+	}break;
+	}
+}
 
 int main() {
 	ControladorProduto *cp = new ControladorProduto();

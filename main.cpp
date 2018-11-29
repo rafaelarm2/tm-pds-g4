@@ -70,12 +70,15 @@ void listarmenu() {
 	std::cout << "4. CRUD Produto" << endl;
 	std::cout << "5. CRUD Cliente" << endl;
 	std::cout << "6. CRUD Funcionário\n" << endl;
+	std::cout << "Ou aperte ESC para sair do programa\n" << endl;
 }
 
 void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf, ControladorProduto cp) {
 	std::cout << "VENDAS"<< endl;
 	std::cout << "1. Registrar nova venda" << endl;
-	std::cout << "2. Relatorio de vendas" << endl;
+	std::cout << "2. Relatorio de vendas\n" << endl;
+	std::cout << "Ou aperte ESC para sair do programa\n" << endl;
+
 
 	int item_menu;
 	std::cout << "Escolha uma seção: ";
@@ -610,9 +613,19 @@ int main() {
 
 	while(1){
 		int item_menu;
+		// char opcao;
+		// int opcao_int;
 		listarmenu();
 
 		std::cout << "Selecionar função: ";
+		// scanf("%c", &opcao);
+
+		// opcao_int = int(opcao);		
+		// 	if (opcao_int == 27){
+		// 		return 0;
+		// 	}else if (opcao_int < 49 || opcao_int > 52){
+		// 		throw SelecaoMenuInvalida();
+		// 	}
 		scanf("%d", &item_menu);
 		switch (item_menu) {
 		case 1: {

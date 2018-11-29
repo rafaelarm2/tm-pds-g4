@@ -31,79 +31,52 @@
 
 using namespace std;
 
-bool checa_data(std::string str){ // verifica se uma string representa um formato de data valido
-    std::string::size_type sz;
-    
-    std::string dia;
-    dia[0] = str[0];
-    dia[1] = str[1];
-    dia[2] = '\0';
-    
-    try { // verifica se o conjunto de caracteres "dia" representa um numeral valido
-		std::stod (dia, &sz);
-	}
-	catch (const std::invalid_argument& ia){
-		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
-		return 0;
-	}
-    int day = std::stod (dia, &sz);
-    
-    
-    std::string mes;
-    mes[0] = str[3];
-    mes[1] = str[4];
-    
-    try { // verifica se o conjunto de caracteres "mes" representa um numeral valido
-		std::stod (mes, &sz);
-	}
-	catch (const std::invalid_argument& ia){
-		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
-		return 0;
-	}
-    int month = std::stod (mes, &sz);
-    
-    
-    std::string ano;
-    ano[0] = str[6];
-    ano[1] = str[7];
-    ano[2] = str[8];
-    ano[3] = str[9];
-    
-    try { // verifica se o conjunto de caracteres "ano" representa um numeral valido
-		std::stod (ano, &sz);
-	}
-	catch (const std::invalid_argument& ia){
-		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
-		return 0;
-	}
-    int year = std::stod (ano, &sz);
-    
-    std::cout << day << std::endl;
-    std::cout << month << std::endl;
-    std::cout << year << std::endl;
-    
-    if(year > 1800){
-        if ( (str[5] == '/') && (str[2] == '/') ){
-            if( (day <= 31) && (day > 0) && ( (month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12) ) ){
-                return true;
-            }
-                else if ( (day <= 30) && (day > 0) && ( (month == 4) || (month == 6) || (month == 9) || (month == 11) ) ){
-                    return true;
-                }
-                    else if ( (day <= 28) && (day > 0) && (month == 2) ){
-                        return true;
-                    }
-                    else {
-                        std::cout << "Formato de data invalido, por favor insira outro valor!" << std::endl;
-                        return false;   
-                    }
-        }
+bool validaCPF(const char * cpf){
+    unsigned lenght = 0;
+    int ver1 = 0, ver2 = 0;
+    char aux;
+
+    /* contando o tamanho de cpf e verificando se o o tamanho do mesmo é 11
+     */
+    while (cpf[lenght]) {
+        lenght++;
     }
-    
-    else{ 
-        std::cout << "Formato de data invalido, por favor insira outro valor!" << std::endl;
+
+    if (lenght != 11)
         return false;
+
+    /* Calculando o primeiro dígito verificador. Cada dígito tem um peso co-
+     * meçando de 1 até 9. Para calculá-lo deve-se somar cada dígito, multi-
+     * plicando-se por seu peso e ao final realizar a operação de módulo por
+     * 11
+     */
+    for (int j=0; j<9; j++){
+        aux = cpf[j];
+        ver1 += atoi(&aux)*(j+1);
     }
+
+    ver1 %= 11;
+
+    /* Para o segundo dígito verificador calcula-se a partir do segundo dí-
+     * gito até o 10º ( dígito verificador 1 ) atribuindo-se o peso de 1  a
+     * 9, e no final realizar a operação Módulo por 11
+     */
+    for (int j=0; j<9; j++){
+        aux = cpf[j];
+        ver2 += atoi(&aux)*j;
+    }
+
+    ver2 += ver1*9;
+    ver2 %= 11;
+
+    /* compara-se agora ver1 e ver2 com os dígitos do cpf */
+    aux = cpf[lenght-2];
+    if (atoi(&aux) == ver1){
+        aux = cpf[lenght-1];
+        if ( atoi(&aux) == ver2)
+            return true;
+    }
+    return false;
 }
 
 void listarmenu() {
@@ -160,13 +133,15 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 			std::cout << "\n\nCLIENTE" << endl;
 			std::cout << "Deseja selecionar cliente? s/n";
 			std::getline(std::cin, choice);
-			//RESTRIÇÃO
+			//RESTRIÇÃO DA ESCOLHA
 			while(choice != "n" && choice != "s" && choice != "S"  && choice != "N") {
 
 				std::cout << "Entrada inválida. Deseja selecionar cliente? s/n";
 				std::getline(std::cin, choice);
 			}
-
+			//VERIFICA SE O CLIENTE SERA INSERIDO
+			//CASO A RESPOSTA SEJA NAO O CLIENTE COM ID 0 SERA REGISTRADO NO BANCO, COMO SE FOSSE UM CLIENTE GERAL
+			//ISSO SERA USADO EM CASOS DE CLIENTES NAO REGISTRADOS
 			if(choice == "n" || choice == "N") {
 				Cliente *c = new Cliente(0);
 				cli = *c;
@@ -217,6 +192,8 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 				std::cout << "Entrada inválida. Deseja selecionar funcionario? s/n ";
 				std::getline(std::cin, choice);
 			}
+			//VERIFICA SE O FUNCIONARIO SERA INSERIDO
+			//CASO A RESPOSTA SEJA NAO O FUNCIONARIO COM ID 0 SERA REGISTRADO NO BANCO, COMO SE FOSSE UM FUNCIONARIO GERAL
 
 			//if(choice == "n" || choice == "N") {
 				Funcionario *f = new Funcionario(0);
@@ -242,6 +219,7 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 			std::cout << "Digite 0 para encerrar a seleção de produtos.\n" << endl;
 			int id = -1;
 			int qtd = -1;
+
 			//VAI COLOCANDO PRODUTO NO CARRINHO ATÉ O ID FOR 0
 			while (id != 0) {
 				std::cout << "Selecionar produto: ";
@@ -292,6 +270,7 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 
 					//REALIZA A BUSCA DO PRODUTONO BANCO DE DADOS
 					*p = cp.buscarProduto(id);
+					//O PRODUTO P CRIADO RECEBERÁ UM PRODUTO Q SERÁ GERADO NA FUNCAO DO BANCO
 
 					//ADICIONA NO LIST
 					itens.push_back(Item(*p, qtd));
@@ -501,7 +480,7 @@ void entrega(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario 
 		} while (id < 0 || !cv.idExiste(id) );
 
 		std::cout << "\n";
-
+		//PEGA A DATA ATUAL
 		time_t timer;
 		struct tm *horarioLocal;
 		time(&timer); // Obtem informações de data e hora
@@ -512,9 +491,9 @@ void entrega(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario 
 		std::stringstream ss;
 		ss << dia << "/" << mes << "/"<< ano;
 		std::string dtatual = ss.str();
-
+		//REALIZA A ENTREGA NO BANCO DE DADOS E SALVA A DATA DA ENTREGA
 		cv.entregar(id, dtatual);
-
+		//EXIBE RELATORIO DE VENDAS COM ENTREGAS REALIZADAS
 		cv.relatorioVendasEntregas(1);
 
 
@@ -559,8 +538,9 @@ void fornecimento(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 		}
 
 	} while (id < 0);
-
+	//CHECA SE O ID EXISTE NO BANCO
 	if(cp.idExiste(id)) {
+		// QTD QUE SERA ACRESCIDA NO ESTOQUE
 		std::cout << "Acrescimo no estoque: ";
 		std::string qtdstr;
 		int qtd;
@@ -580,7 +560,7 @@ void fornecimento(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 
 		} while (qtd <= 0);
 
-
+		//CHAMA A FUNCAO QUE DA ENTRADA NO ESTOQUE NO BANCO DE DADOS
 		cp.entradaProduto(id, qtd);
 	} else {
 		std::cout << "ID não existe." << endl;
@@ -634,7 +614,7 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	switch (menu) {
 	case 1: {
 		std::cout << "\nINSERIR NOVO PRODUTO\n" << endl;
-
+		//CAPTA TODOS OS DADOS DE PRODUTO PELO TECLADO
 		std::cout << "Nome: ";
 		std::string nome;
 		std::getline(std::cin, nome);
@@ -684,9 +664,10 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			}
 
 		} while (estoque <= 0);
-
+		//CRIA NOVO OBJETO DE PRODUTO
+		//LEMBRANDO Q O ID NO BANCO É AUTOINCREMENTO, LOGO N PRECISA GERAR
 		Produto *p = new Produto(nome, preco, marca, estoque);
-
+		//INSERE NO BANCO DE DADOS
 		cp.inserirProduto(*p);
 
 		std::cout << "\nLISTA DE CLIENTES\n" << endl;
@@ -722,12 +703,13 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			}
 
 			if (id < 0) {
-				std::cout << "Inválido. Insira o ID novamente: ";
+				std::cout << "Invalido. Insira o ID novamente: ";
 			}
 
 		} while (id < 0);
-
+		//VERIFICA SE O ID EXISTE NO BANCO
 		if(cp.idExiste(id)) {
+			//REALIZA A BUSCA NO BANCO
 			cp.buscarProduto(id);
 		} else {
 			std::cout << "ID não existe." << endl;
@@ -755,12 +737,13 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			}
 
 			if (id < 0) {
-				std::cout << "Inválido. Insira o ID novamente: ";
+				std::cout << "Invalido. Insira o ID novamente: ";
 			}
 
 		} while (id < 0);
-
+		//VERIFICA SE O ID EXISTE NO BANCO
 		if(cp.idExiste(id)) {
+			//REMOVE O PRODUTO DO BANCO
 			cp.removerProduto(id);
 		} else {
 			std::cout << "\nErro: ID não encontrado." << endl;
@@ -789,12 +772,12 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			}
 
 			if (id < 0) {
-				std::cout << "Inválido. Insira o ID novamente: ";
+				std::cout << "Invalido. Insira o ID novamente: ";
 			}
 
 		} while (id < 0);
 
-
+		//CHECA SE O ID EXISTE E CAPTA OS DADOS DO PRODUTO PARA ALTERAR
 		if(cp.idExiste(id)) {
 			std::cout << "Nome: ";
 			std::string nome;
@@ -807,6 +790,7 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			std::cout << "Preco: ";
 			std::string precostr;
 			double preco;
+			//O ESTOQUE SO EH POSSIVEL ALTERAR ATRAVES DO FORNECIMENTO
 
 			//LEITURA DO NUMERO COM RESTRIÇÃO
 			do {
@@ -820,14 +804,14 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 				}
 
 				if (preco <= 0.0) {
-					std::cout << "Inválido. Insira o preco novamente: ";
+					std::cout << "Invalido. Insira o preco novamente: ";
 				}
 
 			} while (preco <= 0.0);
 
-
+			//CRIA NOVO OBJETO PREODUTO
 			Produto *p = new Produto(nome, preco, marca);
-
+			//REALIZA A ALTERACAO NO BANCO
 			cp.alterarProduto(id, *p);
 
 			std::cout << "\nLISTA DE PRODUTOS\n" << endl;
@@ -859,7 +843,7 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	std::cout << "Selecione uma funcionalidade: ";
 	std::string strmenu;
 	int menu;
-
+	//VALIDAÇÃO DO ITEM DO MENU
 	do {
 		std::getline(std::cin, strmenu);
 
@@ -881,14 +865,22 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	switch (menu) {
 	case 1: {
 		std::cout << "\nINSERIR NOVO CLIENTE\n" << endl;
-
+		//PEGA OS DADOS DO CLIENTE DO TECLADO
 		std::cout << "Nome: ";
 		std::string nome;
 		std::getline(std::cin, nome);
 
 		std::cout << "CPF: ";
-		std::string cpf;
-		std::getline(std::cin, cpf);
+		std::string cpfstr;
+		//CHAMA A FUNÇÃO DE VALIDAÇÃO DE CPF
+		do {
+			std::getline(std::cin, cpfstr);
+
+			if (!validaCPF(cpfstr.c_str())) {
+				std::cout << "Inválido. Insira o CPF novamente: ";
+			}
+
+		} while (!validaCPF(cpfstr.c_str()));
 
 		std::cout << "Email: ";
 		std::string email;
@@ -910,6 +902,7 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 		ss << dia << "/" << mes << "/"<< ano;
 		std::string dtcadastro = ss.str();
 
+		//PEGA O ENDERECO DO CLIENTE
 		std::cout << "Logradouro: ";
 		std::string logradouro;
 		std::getline(std::cin, logradouro);
@@ -950,10 +943,11 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 		std::cout << "Cidade: ";
 		std::string cidade;
 		std::getline(std::cin, cidade);
-
+		//CRIA NOVOS OBJETOS DE ENDERECO E CLIENTE
 		Endereco *end = new Endereco(logradouro, bairro, cep, num, comp, cidade);
-		Cliente *c = new Cliente(nome, cpf, email, *end, tel, dtcadastro, TipoCliente::BRONZE);
+		Cliente *c = new Cliente(nome, cpfstr, email, *end, tel, dtcadastro, TipoCliente::BRONZE);
 
+		//INSERE CLIENTE NO BANCO DE DADOS
 		cc.inserirCliente(*c);
 
 		std::cout << "\nLISTA DE CLIENTES\n" << endl;
@@ -997,8 +991,9 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			}
 
 		} while (id < 0);
-
+		//SE O ID EXISTE (CHECAGEM NO BANCO DE DADOS)
 		if(cc.idExiste(id)) {
+			//CLIENTE É BUSCADO NO BANCO
 			cc.buscarCliente(id);
 		} else {
 			std::cout << "ID não existe." << endl;
@@ -1030,8 +1025,9 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			}
 
 		} while (id < 0);
-
+		//VERIFICA NO BANCO DE DADOS SE O CLIENTE EXISTE
 		if(cc.idExiste(id)) {
+			//REMOVE CLIENTE NO BANCO DE DADOS
 			cc.removerCliente(id);
 		} else {
 			std::cout << "\nErro: ID não encontrado." << endl;
@@ -1065,7 +1061,7 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 
 		} while (id < 0);
 
-
+		//VERIFICA SE O CLIENTE EXISTE E INICIA A CAPTAÇÃO DOS NOVOS DADOS NO TECLADO
 		if(cc.idExiste(id)) {
 			std::cout << "Novo logradouro: ";
 			std::string logradouro;
@@ -1108,8 +1104,9 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			std::string cidade;
 			std::getline(std::cin, cidade);
 
-
+			//CRIA UM NOVO OBJETO CLIENTE
 			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);
+			//ALTERA NO BANCO DE DADOS
 			cc.alterarCliente(id, *end);
 
 			std::cout << "\nLISTA DE CLIENTES\n" << endl;
@@ -1128,323 +1125,7 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	}
 }
 
-void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf, ControladorProduto cp) {
-	std::cout << "CRUD FUNCIONARIO"<< endl;
-	std::cout << "1. Inserir" << endl;
-	std::cout << "2. Listar" << endl;
-	std::cout << "3. Buscar" << endl;
-	std::cout << "4. Remover" << endl;
-	std::cout << "5. Alterar" << endl;
-	std::cout << "6. Voltar" << endl;
 
-	//LEITURA DO MENU COM RESTRIÇÃO
-	std::cout << "Selecione uma funcionalidade: ";
-	std::string strmenu;
-	int menu;
-
-	do {
-		std::getline(std::cin, strmenu);
-
-		try {
-			menu = stoi(strmenu.c_str());
-		} catch (...){
-			menu = 0;
-		}
-
-		if (menu <= 0 || menu > 6) {
-			std::cout << "Inválido. Selecione novamente: ";
-		}
-
-	} while (menu <= 0 || menu > 6);
-
-
-	fflush(stdin);
-
-	switch (menu) {
-	case 1: {
-		std::cout << "\nINSERIR NOVO FUNCIONARIO\n" << endl;
-
-		std::cout << "Nome: ";
-		std::string nome;
-		std::getline(std::cin, nome);
-
-		std::cout << "CPF: ";
-		std::string cpf;
-		std::getline(std::cin, cpf);
-
-		std::cout << "Email: ";
-		std::string email;
-		std::getline(std::cin, email);
-
-		std::cout << "Tel: ";
-		std::string tel;
-		std::getline(std::cin, tel);
-		
-		std::cout << "Data de admissao: ";
-		std::string entrada_dtadmissao;
-		std::string dtadmissao;
-		std::getline(std::cin, entrada_dtadmissao);
-		if (checa_data(entrada_dtadmissao) == 1)
-			dtadmissao = entrada_dtadmissao;
-		else
-			std::getline(std::cin, entrada_dtadmissao);			
-
-		std::cout << "Data de demissao: ";
-		std::string entrada_dtdemissao;
-		std::string dtdemissao;
-		std::getline(std::cin, entrada_dtdemissao);
-		if (checa_data(entrada_dtdemissao) == 1)
-			dtdemissao = entrada_dtdemissao;
-		else
-			std::getline(std::cin, entrada_dtdemissao);
-
-
-		//DATA DE CADASTRO
-		time_t timer;
-		struct tm *horarioLocal;
-		time(&timer); // Obtem informações de data e hora
-		horarioLocal = localtime(&timer); // Converte a hora atual para a hora local
-		int dia = horarioLocal->tm_mday;
-		int mes = horarioLocal->tm_mon + 1;
-		int ano = horarioLocal->tm_year + 1900;
-		std::stringstream ss;
-		ss << dia << "/" << mes << "/"<< ano;
-		std::string dtcadastro = ss.str();
-
-		std::cout << "Logradouro: ";
-		std::string logradouro;
-		std::getline(std::cin, logradouro);
-
-		std::cout << "Bairro: ";
-		std::string bairro;
-		std::getline(std::cin, bairro);
-
-		std::cout << "Num: ";
-		int num;
-		std::string numstr;
-
-
-		//LEITURA DO NUMERO COM RESTRIÇÃO
-		do {
-			std::getline(std::cin, numstr);
-
-			try {
-				num = stoi(numstr.c_str());
-			} catch (...){
-				num = 0;
-			}
-
-			if (num <= 0) {
-				std::cout << "Inválido. Insira o número novamente: ";
-			}
-
-		} while (num <= 0);
-
-		std::cout << "CEP: ";
-		std::string cep;
-		std::getline(std::cin, cep);
-
-		std::cout << "Complemento: ";
-		std::string comp;
-		std::getline(std::cin, comp);
-
-		std::cout << "Cidade: ";
-		std::string cidade;
-		std::getline(std::cin, cidade);
-
-		Endereco *end = new Endereco(logradouro, bairro, cep, num, comp, cidade);
-		Funcionario *f = new Funcionario(nome, cpf, email, *end, tel,  dtadmissao, dtdemissao);
-
-		cc.inserirFuncionario(*f);
-
-		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
-		cc.listarFuncionario();
-
-		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
-		std::getline(std::cin, strmenu);
-
-	} break;
-
-	case 2: {
-
-		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
-		cc.listarFuncionario();
-
-
-		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
-		std::getline(std::cin, strmenu);
-
-
-	}break;
-
-	case 3: {
-
-		std::cout << "\nBUSCA DE FUNCIONARIOS" << endl;
-		std::string idstr;
-		int id;
-		std::cout << "\nInsira o ID desejado para buscar: ";
-		//LEITURA DO ID COM RESTRIÇÃO
-		do {
-			std::getline(std::cin, idstr);
-
-			try {
-				id = stoi(idstr.c_str());
-			} catch (...){
-				id = -1;
-			}
-
-			if (id < 0) {
-				std::cout << "Inválido. Insira o ID novamente: ";
-			}
-
-		} while (id < 0);
-
-		if(cc.idExiste(id)) {
-			cc.buscarFuncionario(id);
-		} else {
-			std::cout << "ID não existe." << endl;
-		}
-
-		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
-		std::getline(std::cin, strmenu);
-
-	}break;
-
-	case 4: {
-		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
-		cc.listarFuncionario();
-		std::string idstr;
-		int id;
-		std::cout << "\nInsira o ID desejado para remover: ";
-		//LEITURA DO ID COM RESTRIÇÃO
-		do {
-			std::getline(std::cin, idstr);
-
-			try {
-				id = stoi(idstr.c_str());
-			} catch (...){
-				id = -1;
-			}
-
-			if (id < 0) {
-				std::cout << "Inválido. Insira o ID novamente: ";
-			}
-
-		} while (id < 0);
-
-		if(cc.idExiste(id)) {
-			cc.removerFuncionario(id);
-		} else {
-			std::cout << "\nErro: ID não encontrado." << endl;
-		}
-
-		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
-		cc.listarFuncionario();
-
-		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
-		std::getline(std::cin, strmenu);
-	} break;
-	case 5: {
-		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
-		cc.listarFuncionario();
-		std::string idstr;
-		int id;
-		std::cout << "\nInsira o ID desejado para alterar: ";
-		//LEITURA DO ID COM RESTRIÇÃO
-		do {
-			std::getline(std::cin, idstr);
-
-			try {
-				id = stoi(idstr.c_str());
-			} catch (...){
-				id = -1;
-			}
-
-			if (id < 0) {
-				std::cout << "Inválido. Insira o ID novamente: ";
-			}
-
-		} while (id < 0);
-
-
-		if(cc.idExiste(id)) {
-			std::cout << "Novo logradouro: ";
-			std::string logradouro;
-			std::getline(std::cin, logradouro);
-
-			std::cout << "Novo bairro: ";
-			std::string bairro;
-			std::getline(std::cin, bairro);
-
-			std::cout << "Novo numero: ";
-			int num;
-			std::string numstr;
-
-
-			//LEITURA DO NUMERO COM RESTRIÇÃO
-			do {
-				std::getline(std::cin, numstr);
-
-				try {
-					num = stoi(numstr.c_str());
-				} catch (...){
-					num = 0;
-				}
-
-				if (num <= 0) {
-					std::cout << "Invalido. Insira o numero novamente: ";
-				}
-
-			} while (num <= 0);
-
-			std::cout << "Novo CEP: ";
-			std::string cep;
-			std::getline(std::cin, cep);
-
-			std::cout << "Novo complemento: ";
-			std::string comp;
-			std::getline(std::cin, comp);
-
-			std::cout << "Nova cidade: ";
-			std::string cidade;
-			std::getline(std::cin, cidade);
-
-    	    		std::cout << "Data de admissao: ";
-			std::string entrada_dtadmissao;
-			std::string dtadmissao;
-			std::getline(std::cin, entrada_dtadmissao);
-			if (checa_data(entrada_dtadmissao) == 1)
-				dtadmissao = entrada_dtadmissao;
-			else
-				std::getline(std::cin, entrada_dtadmissao);			
-
-			std::cout << "Data de demissao: ";
-			std::string entrada_dtdemissao;
-			std::string dtdemissao;
-			std::getline(std::cin, entrada_dtdemissao);
-			if (checa_data(entrada_dtdemissao) == 1)
-				dtdemissao = entrada_dtdemissao;
-			else
-				std::getline(std::cin, entrada_dtdemissao);
-
-			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);
-			cc.alterarFuncionario(id, *end);
-
-			std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
-			cc.listarFuncionario();
-		} else {
-			std::cout << "\nErro: ID não encontrado." << endl;
-		}
-
-		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
-		std::getline(std::cin, strmenu);
-	}break;
-	case 6: {
-		printf("\n\n");
-		return;
-	}break;
-	}
-}
 
 int main() {
 	ControladorProduto *cp = new ControladorProduto();

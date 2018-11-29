@@ -14,7 +14,7 @@ Além disso, o programa gera dois relatórios:
 
 **Informações técnicas:**
 
-O programa é composto de 30 arquivos, sendo que desses, 14 são classes e 1 é o banco de dados.
+O programa foi desenvolvido em C++ e é composto de 30 arquivos, sendo que desses, 14 são classes e 1 é o banco de dados.
 	
 Há polimorfismo em venda e venda com entrega, dessa forma, entrega herda de venda, então possui todos seus 
 atributos e métodos e acrescenta-se o endereço, status de entrega e data de entrega.

@@ -26,6 +26,7 @@ ControladorCliente::~ControladorCliente() {
 	// TODO Auto-generated destructor stub
 }
 
+
 bool ControladorCliente::idExiste(int id) {
 	sqlite3 *db;
 	sqlite3_stmt * stmt;
@@ -34,15 +35,16 @@ bool ControladorCliente::idExiste(int id) {
 	std::stringstream ss;
 	bool encontrou = 0;
 
+	//TESTA A CONEXAO COM O BD
 	if (sqlite3_open("db", &db) == SQLITE_OK) {
 		ss << "SELECT * FROM tbcliente WHERE idcliente = " << id;
 		str = ss.str();
-
+		//PREPARA A QUERY E EXECUTA
 		rc = sqlite3_prepare_v2(db, str.c_str(),-1, &stmt, NULL);
 		if (rc != SQLITE_OK) {
 			fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
 		}
-
+		//CHECA SE ALGUM RESULTADO SERÁ OBTIDO
 		while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
 			encontrou = 1;
 		}
@@ -50,7 +52,7 @@ bool ControladorCliente::idExiste(int id) {
 	} else {
 		cout << "Failed to open db\n";
 	}
-
+	//FINALIZA A CONEXAO
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
 
@@ -64,7 +66,7 @@ void ControladorCliente::inserirCliente(Cliente c) {
 	std::stringstream ss1, ss2, ss3;
 	int rc;
 	int idendereco = 0;
-
+	//INICIA E TESTA A CONEXAO COM O BD
 	if (sqlite3_open("db", &db) == SQLITE_OK) {
 		std::cout << str << endl;
 		ss1 << "INSERT INTO tbendereco(logradouro, bairro, cep, num, comp, cidade) VALUES ('"
@@ -73,15 +75,16 @@ void ControladorCliente::inserirCliente(Cliente c) {
 				<< c.getEndereco().getComp() << "','" << c.getEndereco().getCidade() << "')";
 
 		str = ss1.str();
-		std::cout << str << endl;
+		//PREPARA E EXECUTA A QUERY PARA INSERIR O ENDERECO
 		rc = sqlite3_prepare_v2(db, str.c_str(), -1, &stmt, NULL);
 		sqlite3_step(stmt);
+		//RESETA O STATEMENT
 		sqlite3_reset(stmt);
 
 		ss2 << "SELECT idendereco FROM tbendereco WHERE idendereco = (SELECT MAX(idendereco) FROM tbendereco)";
 		str = ss2.str();
-		std::cout << str << endl;
 
+		//PREPARA E EXECUTA OUTRA QUERY PARA VERIFICAR O ID DO ENDERECO INSERIDO
 		rc = sqlite3_prepare_v2(db, str.c_str(),-1, &stmt, NULL);
 		if (rc != SQLITE_OK) {
 			fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
@@ -90,6 +93,7 @@ void ControladorCliente::inserirCliente(Cliente c) {
 		int idendereco = sqlite3_column_int(stmt, 0);
 		sqlite3_reset(stmt);
 
+		//PREPARA E EXECUTA OUTRA QUERY PARA INSERIR O CLIENTE
 		ss3 << "INSERT INTO tbcliente(nmcliente, cpf, email, tel, dtcadastro, tipo, idendereco) VALUES('"
 				<< c.getNome() << "','" << c.getCpf() << "','" << c.getEmail() << "','" << c.getTel() << "','"
 				<< c.getDtcadastro() <<"','" << c.getTipo() <<"'," << idendereco << ")";
@@ -100,7 +104,7 @@ void ControladorCliente::inserirCliente(Cliente c) {
 	} else {
 		cout << "Failed to open db\n";
 	}
-
+	//FECHA A CONEXAO
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
 }
@@ -109,14 +113,16 @@ void ControladorCliente::listarCliente() {
 	sqlite3 *db;
 	sqlite3_stmt * stmt;
 	int rc;
+	//TESTA A CONEXAO DO BANCO DE DADOS
 	if (sqlite3_open("db", &db) == SQLITE_OK) {
 
 		std::list<Cliente> clientes;
+		//MONTA A QUERY PARA PEGAR TODOS OS CLIENTES DA TABELA
 		rc = sqlite3_prepare_v2(db, "SELECT idcliente, nmcliente, cpf, email, tel, dtcadastro, tipo, logradouro, bairro, cep, num, comp, cidade FROM tbcliente, tbendereco WHERE tbcliente.idendereco = tbendereco.idendereco",-1, &stmt, NULL);
 		if (rc != SQLITE_OK) {
 			fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
 		}
-
+		//PARA CADA LINHA DA TABELA DA CONSULTA SALVA OS RESULTADOS NA VARIAVEL E EXIBE
 		while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
 			int idcliente = sqlite3_column_int(stmt, 0);
 			const char* nmcliente = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
@@ -142,7 +148,7 @@ void ControladorCliente::listarCliente() {
 	} else {
 		cout << "Failed to open db\n";
 	}
-
+	//FECHA A CONEXAO
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
 
@@ -157,7 +163,6 @@ Cliente ControladorCliente::buscarCliente(int id) {
 
 	Endereco *end;
 	Cliente *c;
-
 	if (sqlite3_open("db", &db) == SQLITE_OK) {
 		ss << "SELECT idcliente, nmcliente, cpf, email, tel, dtcadastro, tipo, logradouro, bairro, cep, num, comp, cidade FROM tbcliente, tbendereco WHERE tbcliente.idendereco = tbendereco.idendereco and idcliente = " << id;
 		str = ss.str();

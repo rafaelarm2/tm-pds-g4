@@ -9,4 +9,8 @@ class SelecaoMenuInvalida : public std::exception {
     const char* what() const noexcept override;
 };
 
+class InsercaoDeDadosIncorreta : public std::exception {
+    const char* what() const noexcept override;
+};
+
 #endif

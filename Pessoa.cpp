@@ -1,10 +1,3 @@
-/*
- * Funcionario.cpp
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #include "Pessoa.h"
 #include "Endereco.h"
 #include <string>

@@ -1,5 +1,3 @@
-
-
 #include "ControladorFuncionario.h"
 
 ControladorFuncionario::ControladorFuncionario() {

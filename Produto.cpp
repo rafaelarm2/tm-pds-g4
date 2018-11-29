@@ -1,10 +1,3 @@
-/*
- * Produto.cpp
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #include "Produto.h"
 
 Produto::Produto(std::string nome, double preco, std::string marca, int estoque) { // @suppress("Class members should be properly initialized")

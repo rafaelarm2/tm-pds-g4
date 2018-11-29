@@ -1,9 +1,4 @@
-/*
- * ControladorProduto.h
- *
- *  Created on: 26 de nov de 2018
- *      Author: rafaelamoreira
- */
+
 
 #ifndef CONTROLADORPRODUTO_H_
 #define CONTROLADORPRODUTO_H_

@@ -1,5 +1,3 @@
-
-
 #ifndef VENDAENTREGA_H_
 #define VENDAENTREGA_H_
 

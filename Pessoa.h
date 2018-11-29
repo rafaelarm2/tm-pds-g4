@@ -1,10 +1,3 @@
-/*
- * Funcionario.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef PESSOA_H_
 #define PESSOA_H_
 

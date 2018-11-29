@@ -1,10 +1,3 @@
-/*
- * ControladorVenda.cpp
- *
- *  Created on: 27 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #include "ControladorVenda.h"
 #include "Venda.h"
 #include "VendaEntrega.h"

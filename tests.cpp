@@ -11,5 +11,5 @@
 #include "VendaEntrega.h"
 
 TEST_CASE("Teste main - Selecao menu") {
-    CHECK_THROWS(item_menu = 5);
+    CHECK_THROWS();
 }

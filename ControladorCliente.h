@@ -1,10 +1,3 @@
-/*
- * ControladorCliente.h
- *
- *  Created on: 26 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef CONTROLADORCLIENTE_H_
 #define CONTROLADORCLIENTE_H_
 

@@ -1,10 +1,3 @@
-/*
- * ControladorVenda.h
- *
- *  Created on: 27 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef CONTROLADORVENDA_H_
 #define CONTROLADORVENDA_H_
 

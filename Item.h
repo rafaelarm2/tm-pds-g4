@@ -1,10 +1,3 @@
-/*
- * Item.h
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
-
 #ifndef ITEM_H_
 #define ITEM_H_
 

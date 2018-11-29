@@ -1181,12 +1181,23 @@ void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFun
 		std::getline(std::cin, tel);
 		
 		std::cout << "Data de admissao: ";
+		std::string entrada_dtadmissao;
 		std::string dtadmissao;
-		std::getline(std::cin, dtadmissao);
-		
+		std::getline(std::cin, entrada_dtadmissao);
+		if (checa_data(entrada_dtadmissao) == 1)
+			dtadmissao = entrada_dtadmissao;
+		else
+			std::getline(std::cin, entrada_dtadmissao);			
+
 		std::cout << "Data de demissao: ";
+		std::string entrada_dtdemissao;
 		std::string dtdemissao;
-		std::getline(std::cin, dtdemissao);
+		std::getline(std::cin, entrada_dtdemissao);
+		if (checa_data(entrada_dtdemissao) == 1)
+			dtdemissao = entrada_dtdemissao;
+		else
+			std::getline(std::cin, entrada_dtdemissao);
+
 
 		//DATA DE CADASTRO
 		time_t timer;
@@ -1398,24 +1409,24 @@ void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFun
 			std::string cidade;
 			std::getline(std::cin, cidade);
 
-    	    std::cout << "Data de admissao: ";
-    		std::string entrada_dtadmissao;
-    		std::string dtadmissao;
-    		std::getline(std::cin, entrada_dtadmissao);
-    		if (checa_data(entrada_dtadmissao) == 1)
-    			dtadmissao = entrada_dtadmissao;
-    		else
-    			std::getline(std::cin, entrada_dtadmissao);			
-    		
-    		std::cout << "Data de demissao: ";
-    		std::string entrada_dtdemissao;
-    		std::string dtdemissao;
-    		std::getline(std::cin, entrada_dtdemissao);
-    		if (checa_data(entrada_dtdemissao) == 1)
-    			dtdemissao = entrada_dtdemissao;
-		    else
-			    std::getline(std::cin, entrada_dtdemissao);
-			
+    	    		std::cout << "Data de admissao: ";
+			std::string entrada_dtadmissao;
+			std::string dtadmissao;
+			std::getline(std::cin, entrada_dtadmissao);
+			if (checa_data(entrada_dtadmissao) == 1)
+				dtadmissao = entrada_dtadmissao;
+			else
+				std::getline(std::cin, entrada_dtadmissao);			
+
+			std::cout << "Data de demissao: ";
+			std::string entrada_dtdemissao;
+			std::string dtdemissao;
+			std::getline(std::cin, entrada_dtdemissao);
+			if (checa_data(entrada_dtdemissao) == 1)
+				dtdemissao = entrada_dtdemissao;
+			else
+				std::getline(std::cin, entrada_dtdemissao);
+
 			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);
 			cc.alterarFuncionario(id, *end);
 

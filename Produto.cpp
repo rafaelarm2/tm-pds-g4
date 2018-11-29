@@ -100,6 +100,7 @@ void Produto::saidaProduto(int qtd) {
 	if (this->estoque - qtd >= 0) {
 		this->estoque = this->estoque - qtd;
 	}
-
+	else 
+		throw OperacaoInvalida();
 
 }

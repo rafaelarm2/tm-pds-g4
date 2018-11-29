@@ -1,3 +1,4 @@
+
 #include "Cliente.h"
 #include "Endereco.h"
 #include "Produto.h"
@@ -79,6 +80,7 @@ void listarmenu() {
 	std::cout << "3. Fornecimento" << endl;
 	std::cout << "4. CRUD Produto" << endl;
 	std::cout << "5. CRUD Cliente" << endl;
+	std::cout << "6. CRUD Funcionario" << endl;
 	std::cout << "7. Encerrar\n" << endl;
 
 }
@@ -1118,6 +1120,301 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	}
 }
 
+void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf, ControladorProduto cp) {
+	std::cout << "CRUD FUNCIONARIOS"<< endl;
+	std::cout << "1. Inserir" << endl;
+	std::cout << "2. Listar" << endl;
+	std::cout << "3. Buscar" << endl;
+	std::cout << "4. Remover" << endl;
+	std::cout << "5. Alterar" << endl;
+	std::cout << "6. Voltar" << endl;
+
+	//LEITURA DO MENU COM RESTRIÇÃO
+	std::cout << "Selecione uma funcionalidade: ";
+	std::string strmenu;
+	int menu;
+	//VALIDAÇÃO DO ITEM DO MENU
+	do {
+		std::getline(std::cin, strmenu);
+
+		try {
+			menu = stoi(strmenu.c_str());
+		} catch (...){
+			menu = 0;
+		}
+
+		if (menu <= 0 || menu > 6) {
+			std::cout << "Inválido. Selecione novamente: ";
+		}
+
+	} while (menu <= 0 || menu > 6);
+
+
+	fflush(stdin);
+
+	switch (menu) {
+	case 1: {
+		std::cout << "\nINSERIR NOVO FUNCIONARIO\n" << endl;
+		//PEGA OS DADOS DO CLIENTE DO TECLADO
+		std::cout << "Nome: ";
+		std::string nome;
+		std::getline(std::cin, nome);
+
+		std::cout << "CPF: ";
+		std::string cpfstr;
+		//CHAMA A FUNÇÃO DE VALIDAÇÃO DE CPF
+		do {
+			std::getline(std::cin, cpfstr);
+
+			if (!validaCPF(cpfstr.c_str())) {
+				std::cout << "Inválido. Insira o CPF novamente: ";
+			}
+
+		} while (!validaCPF(cpfstr.c_str()));
+
+		std::cout << "Email: ";
+		std::string email;
+		std::getline(std::cin, email);
+
+		std::cout << "Tel: ";
+		std::string tel;
+		std::getline(std::cin, tel);
+
+		//DATA DE CADASTRO
+		time_t timer;
+		struct tm *horarioLocal;
+		time(&timer); // Obtem informações de data e hora
+		horarioLocal = localtime(&timer); // Converte a hora atual para a hora local
+		int dia = horarioLocal->tm_mday;
+		int mes = horarioLocal->tm_mon + 1;
+		int ano = horarioLocal->tm_year + 1900;
+		std::stringstream ss;
+		ss << dia << "/" << mes << "/"<< ano;
+		std::string dtadmissao = ss.str();
+
+		//PEGA O ENDERECO DO CLIENTE
+		std::cout << "Logradouro: ";
+		std::string logradouro;
+		std::getline(std::cin, logradouro);
+
+		std::cout << "Bairro: ";
+		std::string bairro;
+		std::getline(std::cin, bairro);
+
+		std::cout << "Num: ";
+		int num;
+		std::string numstr;
+
+
+		//LEITURA DO NUMERO COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, numstr);
+
+			try {
+				num = stoi(numstr.c_str());
+			} catch (...){
+				num = 0;
+			}
+
+			if (num <= 0) {
+				std::cout << "Inválido. Insira o número novamente: ";
+			}
+
+		} while (num <= 0);
+
+		std::cout << "CEP: ";
+		std::string cep;
+		std::getline(std::cin, cep);
+
+		std::cout << "Complemento: ";
+		std::string comp;
+		std::getline(std::cin, comp);
+
+		std::cout << "Cidade: ";
+		std::string cidade;
+		std::getline(std::cin, cidade);
+		//CRIA NOVOS OBJETOS DE ENDERECO E CLIENTE
+		Endereco *end = new Endereco(logradouro, bairro, cep, num, comp, cidade);
+		Funcionario *f = new Funcionario(nome, cpfstr, email, *end, tel, dtadmissao);
+
+		//INSERE CLIENTE NO BANCO DE DADOS
+		cf.inserirFuncionario(*f);
+
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cf.listarFuncionario();
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+
+	} break;
+
+	case 2: {
+
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cf.listarFuncionario();
+
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+
+
+	}break;
+
+	case 3: {
+
+		std::cout << "\nBUSCA DE FUNCIONARIOS" << endl;
+		std::string idstr;
+		int id;
+		std::cout << "\nInsira o ID desejado para buscar: ";
+		//LEITURA DO ID COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, idstr);
+
+			try {
+				id = stoi(idstr.c_str());
+			} catch (...){
+				id = -1;
+			}
+
+			if (id < 0) {
+				std::cout << "Inválido. Insira o ID novamente: ";
+			}
+
+		} while (id < 0);
+		//SE O ID EXISTE (CHECAGEM NO BANCO DE DADOS)
+		if(cf.idExiste(id)) {
+			//CLIENTE É BUSCADO NO BANCO
+			cf.buscarFuncionario(id);
+		} else {
+			std::cout << "ID não existe." << endl;
+		}
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+
+	}break;
+
+	case 4: {
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cc.listarCliente();
+		std::string idstr;
+		int id;
+		std::cout << "\nInsira o ID desejado para remover: ";
+		//LEITURA DO ID COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, idstr);
+
+			try {
+				id = stoi(idstr.c_str());
+			} catch (...){
+				id = -1;
+			}
+
+			if (id < 0) {
+				std::cout << "Inválido. Insira o ID novamente: ";
+			}
+
+		} while (id < 0);
+		//VERIFICA NO BANCO DE DADOS SE O CLIENTE EXISTE
+		if(cf.idExiste(id)) {
+			//REMOVE CLIENTE NO BANCO DE DADOS
+			cf.removerFuncionario(id);
+		} else {
+			std::cout << "\nErro: ID não encontrado." << endl;
+		}
+
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cf.listarFuncionario();
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+	} break;
+	case 5: {
+		std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+		cf.listarFuncionario();
+		std::string idstr;
+		int id;
+		std::cout << "\nInsira o ID desejado para alterar: ";
+		//LEITURA DO ID COM RESTRIÇÃO
+		do {
+			std::getline(std::cin, idstr);
+
+			try {
+				id = stoi(idstr.c_str());
+			} catch (...){
+				id = -1;
+			}
+
+			if (id < 0) {
+				std::cout << "Inválido. Insira o ID novamente: ";
+			}
+
+		} while (id < 0);
+
+		//VERIFICA SE O CLIENTE EXISTE E INICIA A CAPTAÇÃO DOS NOVOS DADOS NO TECLADO
+		if(cf.idExiste(id)) {
+			std::cout << "Novo logradouro: ";
+			std::string logradouro;
+			std::getline(std::cin, logradouro);
+
+			std::cout << "Novo bairro: ";
+			std::string bairro;
+			std::getline(std::cin, bairro);
+
+			std::cout << "Novo numero: ";
+			int num;
+			std::string numstr;
+
+
+			//LEITURA DO NUMERO COM RESTRIÇÃO
+			do {
+				std::getline(std::cin, numstr);
+
+				try {
+					num = stoi(numstr.c_str());
+				} catch (...){
+					num = 0;
+				}
+
+				if (num <= 0) {
+					std::cout << "Invalido. Insira o numero novamente: ";
+				}
+
+			} while (num <= 0);
+
+			std::cout << "Novo CEP: ";
+			std::string cep;
+			std::getline(std::cin, cep);
+
+			std::cout << "Novo complemento: ";
+			std::string comp;
+			std::getline(std::cin, comp);
+
+			std::cout << "Nova cidade: ";
+			std::string cidade;
+			std::getline(std::cin, cidade);
+
+			//CRIA UM NOVO OBJETO CLIENTE
+			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);
+			//ALTERA NO BANCO DE DADOS
+			cf.alterarFuncionario(id, *end);
+
+			std::cout << "\nLISTA DE FUNCIONARIOS\n" << endl;
+			cf.listarFuncionario();
+		} else {
+			std::cout << "\nErro: ID não encontrado." << endl;
+		}
+
+		std::cout << "\nDigite qualquer caracter para voltar ao menu: ";
+		std::getline(std::cin, strmenu);
+	}break;
+	case 6: {
+		printf("\n\n");
+		return;
+	}break;
+	}
+}
+
 
 
 int main() {
@@ -1177,6 +1474,7 @@ int main() {
 		case 6: {
 			//CRUD DE FUNCIONARIOS
 			printf("\n\n");
+			crud_funcionario(*cv, *cc, *cf, *cp);
 		}break;
 		case 7: {
 			exit(0);

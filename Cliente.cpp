@@ -1,9 +1,4 @@
-/*
- * Cliente.cpp
- *
- *  Created on: 25 de nov de 2018
- *      Author: rafaelamoreira
- */
+
 
 #include "Cliente.h"
 #include "Pessoa.h"

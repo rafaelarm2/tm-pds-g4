@@ -2,6 +2,7 @@
 
 #	 		CONTROLE DE ESTOQUE
 **Funcionamento:**
+
 O programa trata-se de um controle de estoque e, para tal, registra as vendas de uma determinada empresa 
 identificando, no processo, o cliente e o funcionario.
 	
@@ -12,6 +13,7 @@ Além disso, o programa gera dois relatórios:
 * Entregas realizadas
 
 **Informações técnicas:**
+
 O programa é composto de 29 arquivos, sendo que desses, 14 são classes e 1 é o banco de dados.
 	
 Há polimorfismo em venda e venda com entrega, dessa forma, entrega herda de venda, então possui todos seus 
@@ -41,4 +43,4 @@ Give an example
 
 * **André Fiuza Fonseca Camargos** 
 * **Danilo Siqueira Santos** 
-* **Rafaela Moreira Milagres**   
+* **Rafaela Milagres Moreira**   

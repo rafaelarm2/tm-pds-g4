@@ -1,9 +1,4 @@
-/*
- * ControladorCliente.cpp
- *
- *  Created on: 26 de nov de 2018
- *      Author: rafaelamoreira
- */
+
 
 #include "ControladorCliente.h"
 #include "Cliente.h"

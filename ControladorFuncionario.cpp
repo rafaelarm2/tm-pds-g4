@@ -1,9 +1,4 @@
-/*
- * ControladorFuncionario.cpp
- *
- *  Created on: 26 de nov de 2018
- *      Author: rafaelamoreira
- */
+
 
 #include "ControladorFuncionario.h"
 

@@ -24,20 +24,11 @@ entrega é adicionada.
 
 O relatório de entregas realizadas utiliza o id da venda para conseguir alterar seu status de pendente para realizada e sua data de entrega. Isso acarreta uma mudança no próprio banco de dados, pois é necessário utilizar a função de controlador.
 
+
 ## Utilizando o programa
 
 //These instructions will get you a copy of the project up and running on your local machine for development and //testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-
-## Rodando os tests
-
-Explain how to run the automated tests for this system
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Autores
 

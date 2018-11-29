@@ -13,4 +13,8 @@ class InsercaoDeDadosIncorreta : public std::exception {
     const char* what() const noexcept override;
 };
 
+class OperacaoInvalida : public std::exception {
+    const char* what() const noexcept override;
+};
+
 #endif

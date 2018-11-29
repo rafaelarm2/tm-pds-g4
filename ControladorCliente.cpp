@@ -65,10 +65,8 @@ void ControladorCliente::inserirCliente(Cliente c) {
 	std::string str;
 	std::stringstream ss1, ss2, ss3;
 	int rc;
-	int idendereco = 0;
 	//INICIA E TESTA A CONEXAO COM O BD
 	if (sqlite3_open("db", &db) == SQLITE_OK) {
-		std::cout << str << endl;
 		ss1 << "INSERT INTO tbendereco(logradouro, bairro, cep, num, comp, cidade) VALUES ('"
 				<< c.getEndereco().getLogradouro() << "','" << c.getEndereco().getBairro() << "','"
 				<< c.getEndereco().getCep() <<"'," << c.getEndereco().getNum() << ", '"
@@ -98,7 +96,7 @@ void ControladorCliente::inserirCliente(Cliente c) {
 				<< c.getNome() << "','" << c.getCpf() << "','" << c.getEmail() << "','" << c.getTel() << "','"
 				<< c.getDtcadastro() <<"','" << c.getTipo() <<"'," << idendereco << ")";
 		str = ss3.str();
-		std::cout << str << endl;
+
 		rc = sqlite3_prepare_v2(db, str.c_str(), -1, &stmt, NULL);
 		sqlite3_step(stmt);
 	} else {

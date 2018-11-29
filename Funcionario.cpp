@@ -12,7 +12,7 @@
 
 using namespace std;
 
-Funcionario::Funcionario(std::string nome, std::string cpf, std::string email, Endereco endereco,
+Funcionario::Funcionario(std::string nome, std::string cpf, std::string email, Endereco endereco, // @suppress("Class members should be properly initialized")
 		std::string tel, std::string dtadmissao, std::string dtdemissao):
 		Pessoa(nome, cpf, email, endereco, tel) {
 	this->dtadmissao = dtadmissao;
@@ -24,7 +24,7 @@ Funcionario::Funcionario(int id): Pessoa() {
 	this->id = id;
 }
 
-Funcionario::Funcionario(): Pessoa() {
+Funcionario::Funcionario(): Pessoa() { // @suppress("Class members should be properly initialized")
 
 }
 

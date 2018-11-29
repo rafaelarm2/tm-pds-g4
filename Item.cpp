@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Item::Item(Produto produto, int qtd) {
+Item::Item(Produto produto, int qtd) { // @suppress("Class members should be properly initialized")
 	this->produto = produto;
 	this->qtd = qtd;
 	this->vltotal = produto.getPreco() * qtd;

@@ -76,7 +76,7 @@ void ControladorProduto::inserirProduto(Produto p) {
 		int rc;
 		ss << "INSERT INTO tbproduto(nmproduto, preco, marca, estoque) VALUES('" << p.getNome() << "'," << p.getPreco() << ",'" << p.getMarca() <<"'," << p.getEstoque() <<")";
 		str = ss.str();
-		std::cout << str <<endl;
+
 		rc = sqlite3_prepare_v2(db, str.c_str(), -1, &stmt, NULL);
 		sqlite3_step(stmt);
 	} else {
@@ -258,8 +258,6 @@ void ControladorProduto::entradaProduto(int id, int qtd) {
 		estoque = estoque + qtd;
 		ss2 << "UPDATE tbproduto SET estoque="<< estoque <<" WHERE idproduto=" << id;
 		str = ss2.str();
-
-		std::cout << str << endl;
 
 		rc = sqlite3_prepare_v2(db, str.c_str(), -1, &stmt, NULL);
 		sqlite3_step(stmt);

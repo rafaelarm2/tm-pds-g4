@@ -16,7 +16,7 @@
 using namespace std;
 
 
-Venda::Venda(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario, int desconto) {
+Venda::Venda(std::string dtcompra, std::list<Item> itens, Cliente cliente, Funcionario funcionario, int desconto) { // @suppress("Class members should be properly initialized")
 	this->dtcompra = dtcompra;
 	this->itens = itens;
 	this->cliente = cliente;

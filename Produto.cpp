@@ -7,49 +7,28 @@
 
 #include "Produto.h"
 
-Produto::Produto(std::string nome, double preco, std::string marca, int estoque) {
+Produto::Produto(std::string nome, double preco, std::string marca, int estoque) { // @suppress("Class members should be properly initialized")
 	// TODO Auto-generated constructor stub
 	this->nome = nome;
+	this->preco = preco;
 	this->marca = marca;
-	
-	if (preco < 0)
-		throw InsercaoDeDadosIncorreta();
-	else 
-		this->preco = preco;
-
-	if (estoque < 0)
-		throw InsercaoDeDadosIncorreta();
-	else
-		this->estoque = estoque;
+	this->estoque = estoque;
 }
 
-
-Produto::Produto(std::string nome, double preco, std::string marca) {
+Produto::Produto(std::string nome, double preco, std::string marca) { // @suppress("Class members should be properly initialized")
 	// TODO Auto-generated constructor stub
 	this->nome = nome;
+	this->preco = preco;
 	this->marca = marca;
-	
-	if (preco < 0)
-		throw InsercaoDeDadosIncorreta();
-	else 
-		this->preco = preco;
 }
 
 Produto::Produto(int id, std::string nome, double preco, std::string marca, int estoque) {
 	// TODO Auto-generated constructor stub
 	this->nome = nome;
+	this->preco = preco;
 	this->marca = marca;
 	this->id = id;
-	
-	if (preco < 0)
-		throw InsercaoDeDadosIncorreta();
-	else 
-		this->preco = preco;
-	
-	if (estoque < 0)
-		throw InsercaoDeDadosIncorreta();
-	else
-		this->estoque = estoque;
+	this->estoque = estoque;
 }
 
 Produto::Produto(){ // @suppress("Class members should be properly initialized")
@@ -106,6 +85,6 @@ void Produto::saidaProduto(int qtd) {
 	if (this->estoque - qtd >= 0) {
 		this->estoque = this->estoque - qtd;
 	}
-	else 
-		throw OperacaoInvalida();
+
+
 }

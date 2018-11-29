@@ -9,7 +9,7 @@
 #include "Pessoa.h"
 #include <string>
 
-Cliente::Cliente(std::string nome, std::string cpf, std::string email, Endereco endereco,
+Cliente::Cliente(std::string nome, std::string cpf, std::string email, Endereco endereco, // @suppress("Class members should be properly initialized")
 		std::string tel, std::string dtcadastro, TipoCliente tipo): Pessoa(nome, cpf, email, endereco, tel) {
 	this->dtcadastro = dtcadastro;
 	this->tipo = tipo;
@@ -28,7 +28,7 @@ Cliente::Cliente(int id): Pessoa() { // @suppress("Class members should be prope
 	this->id = id;
 }
 
-Cliente::Cliente(): Pessoa() {
+Cliente::Cliente(): Pessoa() { // @suppress("Class members should be properly initialized")
 
 }
 

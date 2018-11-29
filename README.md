@@ -27,7 +27,7 @@ O relatório de entregas realizadas utiliza o id da venda para conseguir alterar
 
 ## Utilizando o programa
 
-//These instructions will get you a copy of the project up and running on your local machine for development and //testing purposes. See deployment for notes on how to deploy the project on a live system.
+O programa funciona no terminal do compilador e para avançar pelo menu é necessário utilizar entradas do teclado. Todas as instruções necessárias para utilizar cada uma das funcionalidades é exibida na tela.
 
 
 ## Autores

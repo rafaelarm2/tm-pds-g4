@@ -41,4 +41,4 @@ Give an example
 
 * **André Fiuza Fonseca Camargos** 
 * **Danilo Siqueira Santos** 
-* **Rafaela Moreira Milagres**   
+* **Rafaela Milagres Moreira**   

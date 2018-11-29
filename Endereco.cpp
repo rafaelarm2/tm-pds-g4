@@ -15,20 +15,8 @@ Endereco::Endereco(std::string logradouro, std::string bairro, std::string cep,
 	// TODO Auto-generated constructor stub
 	this->logradouro = logradouro;
 	this->bairro = bairro;
-	
-	std::string::size_type sz;    
-	try {
-		std::stod (cep, &sz);
-	}
-	catch (const std::invalid_argument& ia){
-		throw InsercaoDeDadosIncorreta();
-	}
 	this->cep = cep;
-	
-	if (num <= 0)
-		throw InsercaoDeDadosIncorreta();
-	else
-		this->num = num;
+	this->num = num;
 	this->comp = comp;
 	this->cidade = cidade;
 }

@@ -26,6 +26,37 @@ ControladorCliente::~ControladorCliente() {
 	// TODO Auto-generated destructor stub
 }
 
+bool ControladorCliente::idExiste(int id) {
+	sqlite3 *db;
+	sqlite3_stmt * stmt;
+	int rc;
+	std::string str;
+	std::stringstream ss;
+	bool encontrou = 0;
+
+	if (sqlite3_open("db", &db) == SQLITE_OK) {
+		ss << "SELECT * FROM tbcliente WHERE idcliente = " << id;
+		str = ss.str();
+
+		rc = sqlite3_prepare_v2(db, str.c_str(),-1, &stmt, NULL);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+		}
+
+		while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+			encontrou = 1;
+		}
+
+	} else {
+		cout << "Failed to open db\n";
+	}
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+
+	return (encontrou);
+}
+
 void ControladorCliente::inserirCliente(Cliente c) {
 	sqlite3 *db;
 	sqlite3_stmt * stmt;

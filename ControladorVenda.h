@@ -29,6 +29,7 @@ public:
 	void relatorioVendasEntregas();
 	void relatorioVendasEntregas(int status);
 	void entregar(int identrega, std::string dtentrega);
+	bool idExiste(int id);
 
 
 };

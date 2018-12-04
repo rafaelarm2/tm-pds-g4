@@ -25,6 +25,54 @@
 
 using namespace std;
 
+bool verifica_dados_endereco(std::string info){
+    if((info == "") || (info == " ")){
+	    std::cout << "Invalido. Insira o argumento corretamente." << std::endl;
+	    return 0;
+	}
+	else {
+	    for (int i = 0; i < info.length(); i++){
+	        if(isalpha(info[i]) == 0){
+	            std::cout << "Invalido. Insira o argumento corretamente." << std::endl;
+	            return 0;
+	        }
+	       else continue;
+	    }
+	}
+    
+    return 1;
+}
+
+bool verifica_cep(std::string cep){
+    std::string::size_type sz;
+    
+    try {
+        std::stod (cep, &sz);
+    }
+
+    catch (const std::invalid_argument& ia){
+		std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
+		return 0;
+	}
+	
+	for (int i = 0; i < 8; i++){
+	    if(cep[i] == '\0'){
+	        std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
+	        return 0;
+	        break;
+	    }
+	    else 
+	        continue;
+	}
+	
+	if(cep[8] != '\0'){
+	    std::cout << "Argumento invalido, por favor insira outro valor. " << std::endl;
+	    return 0;
+	}
+	
+	return 1; 
+}
+
 bool validaCPF(const char * cpf){
     unsigned lenght = 0;
     int ver1 = 0, ver2 = 0;
@@ -330,10 +378,13 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 					std::cout << "Logradouro: ";
 					std::string logradouro;
 					std::getline(std::cin, logradouro);
-
-					std::cout << "Bairro: ";
+					
 					std::string bairro;
+					
+					do {
+					std::cout << "Bairro: ";
 					std::getline(std::cin, bairro);
+					} while (verifica_dados_endereco(bairro) != 1);
 
 					std::cout << "Num: ";
 					int num;
@@ -355,17 +406,21 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 
 					} while (num <= 0);
 
-					std::cout << "CEP: ";
 					std::string cep;
+					do {
+					std::cout << "CEP: ";
 					std::getline(std::cin, cep);
-
+					} while (verifica_cep(cep) != 1);
+					
 					std::cout << "Complemento: ";
 					std::string comp;
 					std::getline(std::cin, comp);
 
-					std::cout << "Cidade: ";
 					std::string cidade;
+					do {
+					std::cout << "Cidade: ";
 					std::getline(std::cin, cidade);
+					} while (verifica_dados_endereco(cidade) != 1);
 
 					std::cout << "Frete: ";
 					int frete;
@@ -902,9 +957,11 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 		std::string logradouro;
 		std::getline(std::cin, logradouro);
 
-		std::cout << "Bairro: ";
 		std::string bairro;
+		do {
+		std::cout << "Bairro: ";
 		std::getline(std::cin, bairro);
+		} while (verifica_dados_endereco(bairro) != 1);
 
 		std::cout << "Num: ";
 		int num;
@@ -927,17 +984,22 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 
 		} while (num <= 0);
 
-		std::cout << "CEP: ";
 		std::string cep;
+		do {
+		std::cout << "CEP: ";
 		std::getline(std::cin, cep);
+		} while (verifica_cep(cep) != 1);
 
 		std::cout << "Complemento: ";
 		std::string comp;
 		std::getline(std::cin, comp);
 
-		std::cout << "Cidade: ";
 		std::string cidade;
+		do {
+		std::cout << "Cidade: ";
 		std::getline(std::cin, cidade);
+		} while (verifica_dados_endereco(cidade) != 1);
+		
 		//CRIA NOVOS OBJETOS DE ENDERECO E CLIENTE
 		Endereco *end = new Endereco(logradouro, bairro, cep, num, comp, cidade);
 		Cliente *c = new Cliente(nome, cpfstr, email, *end, tel, dtcadastro, TipoCliente::BRONZE);
@@ -1061,11 +1123,13 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			std::cout << "Novo logradouro: ";
 			std::string logradouro;
 			std::getline(std::cin, logradouro);
-
-			std::cout << "Novo bairro: ";
+			
 			std::string bairro;
+			do {
+			std::cout << "Novo bairro: ";
 			std::getline(std::cin, bairro);
-
+			} while (verifica_dados_endereco(bairro) != 1);
+			
 			std::cout << "Novo numero: ";
 			int num;
 			std::string numstr;
@@ -1087,17 +1151,23 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 
 			} while (num <= 0);
 
-			std::cout << "Novo CEP: ";
+			
 			std::string cep;
+			do {
+			std::cout << "Novo CEP: ";
 			std::getline(std::cin, cep);
-
+			} while (verifica_cep(cep) != 1);
+		
 			std::cout << "Novo complemento: ";
 			std::string comp;
 			std::getline(std::cin, comp);
-
-			std::cout << "Nova cidade: ";
+			
 			std::string cidade;
+			do {
+			std::cout << "Nova cidade: ";
 			std::getline(std::cin, cidade);
+			} while (verifica_dados_endereco(cidade) != 1);
+			
 
 			//CRIA UM NOVO OBJETO CLIENTE
 			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);

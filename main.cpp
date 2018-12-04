@@ -22,6 +22,7 @@
 #include <time.h>
 #include <sstream>
 #include <algorithm>
+#include <cctype>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ bool verifica_dados_endereco(std::string info){
 	}
 	else {
 	    for (int i = 0; i < info.length(); i++){
-	        if(isalpha(info[i]) == 0){
+	        if((isalpha(info[i]) == 0) && (info[i] != ' ')){
 	            std::cout << "Invalido. Insira o argumento corretamente." << std::endl;
 	            return 0;
 	        }

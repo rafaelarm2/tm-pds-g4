@@ -55,3 +55,27 @@ TEST_CASE("2.2 - Testando a validade dos dados de um endereco") {
 TEST_CASE("2.3 - Testando a validade dos dados de um endereco") {
     CHECK_THROWS(new Endereco("Rua do Ouro", "Bairro Guaporel", "65984567", num, "Sem complemento", "Oakland"));
 }    
+
+                 
+TEST_CASE("03 - Testando a incializacao de um funcionario pelo construtor") {
+    Cliente new_client1("Jimmy Butler", "63680134002", "jimmiygbuckets@sixers.ph", /*???*/, "25769898", "05/12/2018", /*???*/);
+    CHECK(new_client1.getCpf() == 63680134002);
+    CHECK(new_client1.getDtcadastro() == 05/12/2018);
+    CHECK(new_client1.getNome() == "Jimmy Butler");
+}
+
+TEST_CASE("3.1 - Testando a validade dos dados de um cliente") {
+    Cliente new_client1("Jimmy Butler", "63680134002", "jimmiygbuckets@sixers.ph", /*???*/, "25769898", "05/12/2018", /*???*/);
+    CHECK(validaCPF(new_client1.getCpf()) == true);
+    CHECK(checa_data(new_client1.getDtcadastro()) == true);
+}
+
+//Cpf invalido
+TEST_CASE("3.2 - Testando a incializacao incorreta de um funcionario") {
+    CHECK_THROWS(new Cliente("Ben Simmons", "26713481025", "bentreysimmons@sixers.ph", /*???*/, "31457676", "05/12/2018", /*???*/);
+}
+//Formato de data invalido
+TEST_CASE("3.3 - Testando a incializacao incorreta de um funcionario") {
+    CHECK_THROWS(new Cliente("Joel Embiid", "61435981006", "Jojotheprocess@sixers.ph", /*???*/, "21000376", "30/02/2018", /*???*/);
+}
+                 

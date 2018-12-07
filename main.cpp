@@ -295,11 +295,11 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 			//VERIFICA SE O FUNCIONARIO SERA INSERIDO
 			//CASO A RESPOSTA SEJA NAO O FUNCIONARIO COM ID 0 SERA REGISTRADO NO BANCO, COMO SE FOSSE UM FUNCIONARIO GERAL
 
-			//if(choice == "n" || choice == "N") {
+			if(choice == "n" || choice == "N") {
 				Funcionario *f = new Funcionario(0);
 				fun = *f;
 				idfuncionario = "0";
-			/*} else {
+			} else {
 				if(choice == "s" || choice == "S") {
 					std::cout << "\n" << endl;
 					std::cout << "LISTA DE FUNCIONARIOS" << endl;
@@ -309,7 +309,7 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 					std::cout << idfuncionario << endl;
 				}
 			}
-			*/
+			
 
 
 			///////////////////////////////////////// SELEÇÃO DE PRODUTOS

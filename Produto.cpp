@@ -1,4 +1,5 @@
 #include "Produto.h"
+#include "excecoes.h"
 
 Produto::Produto(std::string nome, double preco, std::string marca, int estoque) { // @suppress("Class members should be properly initialized")
 	// TODO Auto-generated constructor stub

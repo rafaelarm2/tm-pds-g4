@@ -1,6 +1,6 @@
 
 #include "Funcionario.h"
-
+#include "excecoes.h"
 #include <string>
 #include <iostream>
 

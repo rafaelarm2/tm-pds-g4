@@ -5,10 +5,7 @@
 using namespace std;
 
 Item::Item(Produto produto, int qtd) { // @suppress("Class members should be properly initialized")
-	if(num > 0)
-		this->produto = produto;
-	else 
-		throw InsercaoDeDadosIncorreta();
+	this->produto = produto;
 	
 	if(qtd > 0)
 		this->qtd = qtd;

@@ -7,7 +7,7 @@ using namespace std;
 Item::Item(Produto produto, int qtd) { // @suppress("Class members should be properly initialized")
 	this->produto = produto;
 	
-	if(qtd > 0)
+	if( (qtd > 0) && (qtd <= produto.getEstoque()) )
 		this->qtd = qtd;
 	else 
 		throw InsercaoDeDadosIncorreta();

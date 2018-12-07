@@ -24,6 +24,22 @@ entrega é adicionada.
 
 O relatório de entregas realizadas utiliza o id da venda para conseguir alterar seu status de pendente para realizada e sua data de entrega. Isso acarreta uma mudança no próprio banco de dados, pois é necessário utilizar a função de controlador.
 
+**A respeito das classes:**
+
+Foram criadas classes que representam indivíduos: 
+
+Pessoa, que possui atributos que são dados pessoais comuns. Tal classe é herdada por Cliente e por Funcionário, sendo que a diferença entre elas é que a primeira possui uma data de cadastro e o seu tipo (classificação de nível do cliente) e a segunda, possui informações relativas à contratação de funcionário.
+
+Existem, também, as classes que estão relacionadas aos produtos da empresa:
+
+Produto, que possui informações gerais de um determinado produto. Item, que tem Produto e mais algumas características que são utilizadas para a venda.
+
+Outro quesito essencial é o que tange às vendas:
+
+Venda, tem Item, Cliente e Funcionário, sendo uma das principais classes, pois é a que realiza as vendas na empresa. VendaEntrega herda de Venda e acrescenta-se as especificidades de uma entrega, como Endereço, data de entrega e status da encomenda.
+
+As classes controladoras intermediam o contato com o banco de dados, para que as informações sajam lidas, salvas ou removidas.
+
 
 ## Utilizando o programa
 

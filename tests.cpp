@@ -86,4 +86,37 @@ TEST_CASE("3.3 - Testando a incializacao incorreta de um funcionario") {
     Endereco end_func3("Rua dos Otoni", "Bairro Grajau", "54125963", 26, "Sem complemento", "Belo Horizonte");
     CHECK_THROWS(new Funcionario("Joel Embiid", "61435981006", "Jojotheprocess@sixers.ph", end_func3, "21000376", "30/02/2018");
 }
+     
                  
+TEST_CASE("04 - Testando a incializacao de um produto pelo construtor") {
+    // Produto::Produto(std::string nome, double preco, std::string marca, int estoque)
+    Produto p1("Esmalte", 3.90, "Risque", 30); 
+    CHECK(p1.getNome() == "Esmalte");
+    CHECK(p1.getPreco() == 3.90);
+    CHECK(p1.getMarca() == "Risque");
+    CHECK(p1.getEstoque() == 30);
+}
+                 
+//Preco igual a 0
+ TEST_CASE("4.1 - Testando a incializacao incorreta de um produto") {
+    CHECK_THROWS(new Produto("Esmalte", 0.00, "Risque", 30); 
+}
+              
+//Quantidade de estoque negativa
+TEST_CASE("4.2 - Testando a incializacao incorreta de um produto") {
+    CHECK_THROWS(new Produto("Esmalte", 4.25, "Risque", -13); 
+}
+                 
+//Item::Item(Produto produto, int qtd) { // @suppress("Class members should be properly initialized")
+TEST_CASE("05 - Testando a incializacao de um item pelo construtor") {
+    Produto p2("Lixa", 0.99, "Avon", 50); 
+    Item i1(p2, 5)
+    CHECK(i1.getVltotal() == 4.95);
+    CHECK(i1.getQtd() == 5);
+}
+                 
+//Quantidade pedida maior que o estoque
+TEST_CASE("4.2 - Testando a incializacao incorreta de um item") {
+    Produto p2("Lixa", 0.99, "Avon", 50);
+    CHECK_THROWS(p2, 55); 
+}

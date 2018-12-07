@@ -1,5 +1,6 @@
 #include "Endereco.h"
 #include <string>
+#include "excecoes.h"
 
 using namespace std;
 
@@ -74,7 +75,11 @@ Endereco::Endereco(std::string logradouro, std::string bairro, std::string cep, 
 	else 
 		throw InsercaoDeDadosIncorreta();
 	
-	this->num = num;
+	if(num > 0)
+		this->num = num;
+	else 
+		throw InsercaoDeDadosIncorreta();
+	
 	this->comp = comp;
 }
 

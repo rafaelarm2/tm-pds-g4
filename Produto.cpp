@@ -3,22 +3,38 @@
 Produto::Produto(std::string nome, double preco, std::string marca, int estoque) { // @suppress("Class members should be properly initialized")
 	// TODO Auto-generated constructor stub
 	this->nome = nome;
-	this->preco = preco;
+	
+	if(preco > 0)
+		this->preco = preco;
+	else 
+		throw InsercaoDeDadosIncorreta();
+	
 	this->marca = marca;
-	this->estoque = estoque;
-}
+	
+	if(estoque > 0)
+		this->estoque = estoque;
+	else 
+		throw InsercaoDeDadosIncorreta();
+	
+	}
 
 Produto::Produto(std::string nome, double preco, std::string marca) { // @suppress("Class members should be properly initialized")
 	// TODO Auto-generated constructor stub
 	this->nome = nome;
-	this->preco = preco;
+	if(preco > 0)
+		this->preco = preco;
+	else 
+		throw InsercaoDeDadosIncorreta();
 	this->marca = marca;
 }
 
 Produto::Produto(int id, std::string nome, double preco, std::string marca, int estoque) {
 	// TODO Auto-generated constructor stub
 	this->nome = nome;
-	this->preco = preco;
+	if(preco > 0)
+		this->preco = preco;
+	else 
+		throw InsercaoDeDadosIncorreta();
 	this->marca = marca;
 	this->id = id;
 	this->estoque = estoque;

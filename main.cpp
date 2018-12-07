@@ -82,6 +82,7 @@ bool checa_data(std::string str){
     }
 }
 
+//funcao que indica incorrecao na entrada dos dados. Nao permite valor em branco, apenas espacos ou apenas caracteres numericos.
 bool verifica_dados_endereco(std::string info){
     if((info == "") || (info == " ")){
 	    std::cout << "Invalido. Insira o argumento corretamente." << std::endl;
@@ -98,6 +99,31 @@ bool verifica_dados_endereco(std::string info){
 	}
     
     return 1;
+}
+
+//funcao que indica incorrecao na entrada dos dados. Nao permite valor em branco, apenas espacos ou apenas caracteres numericos.
+//Numeros podem ser incluidos, porem, desde que nao representem a totalidade da palavra
+bool verifica_dados(std::string info){
+int contador = 0;
+	
+	if((info == "") || (info == " ")){
+		std::cout << "Invalido. Insira o argumento corretamente." << std::endl;
+	    	return 0;
+	}
+	else {
+	    for (int i = 0; i < info.length(); i++){
+	        if(isalpha(info[i]) == 0)
+	        	contador += 1;
+		else 
+			continue;
+	    }
+		
+	if ( contador == info.length() ){
+		std::cout << "Invalido. Insira o argumento corretamente." << std::endl;
+		return 0;
+	}
+	else 
+		return 1;	}
 }
 
 bool verifica_cep(std::string cep){
@@ -432,9 +458,12 @@ void venda(ControladorVenda cv, ControladorCliente cc, ControladorFuncionario cf
 				if(choice == "s" || choice == "S") {
 					std::cout << "ENTREGA" << endl;
 
-					std::cout << "Logradouro: ";
 					std::string logradouro;
+					do {
+					std::cout << "Logradouro: ";
 					std::getline(std::cin, logradouro);
+					} while (verifica_dados_endereco(logradouro) != 1);
+
 					
 					std::string bairro;
 					
@@ -722,13 +751,18 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	case 1: {
 		std::cout << "\nINSERIR NOVO PRODUTO\n" << endl;
 		//CAPTA TODOS OS DADOS DE PRODUTO PELO TECLADO
-		std::cout << "Nome: ";
+		
 		std::string nome;
+		do {
+		std::cout << "Nome: ";
 		std::getline(std::cin, nome);
+		} while (verifica_dados(nome) != 1);
 
-		std::cout << "Marca: ";
 		std::string marca;
+		do {
+		std::cout << "Marca: ";
 		std::getline(std::cin, marca);
+		} while (verifica_dados(marca) != 1);
 
 		std::cout << "Preco: ";
 		std::string precostr;
@@ -886,13 +920,19 @@ void crud_produto(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 
 		//CHECA SE O ID EXISTE E CAPTA OS DADOS DO PRODUTO PARA ALTERAR
 		if(cp.idExiste(id)) {
-			std::cout << "Nome: ";
+			
 			std::string nome;
+			do {
+			std::cout << "Nome: ";
 			std::getline(std::cin, nome);
+			} while (verifica_dados(nome) != 1);
 
-			std::cout << "Marca: ";
+
 			std::string marca;
+			do {
+			std::cout << "Marca: ";
 			std::getline(std::cin, marca);
+			} while (verifica_dados(marca) != 1);
 
 			std::cout << "Preco: ";
 			std::string precostr;
@@ -973,9 +1013,12 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 	case 1: {
 		std::cout << "\nINSERIR NOVO CLIENTE\n" << endl;
 		//PEGA OS DADOS DO CLIENTE DO TECLADO
-		std::cout << "Nome: ";
 		std::string nome;
+		do {
+		std::cout << "Nome: ";
 		std::getline(std::cin, nome);
+		} while (verifica_dados(nome) != 1);
+
 
 		std::cout << "CPF: ";
 		std::string cpfstr;
@@ -988,10 +1031,12 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 			}
 
 		} while (!validaCPF(cpfstr.c_str()));
-
-		std::cout << "Email: ";
+		
 		std::string email;
+		do {
+		std::cout << "Email: ";
 		std::getline(std::cin, email);
+		} while (verifica_dados(email) != 1);
 
 		std::cout << "Tel: ";
 		std::string tel;
@@ -1010,9 +1055,12 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 		std::string dtcadastro = ss.str();
 
 		//PEGA O ENDERECO DO CLIENTE
-		std::cout << "Logradouro: ";
 		std::string logradouro;
+		do {
+		std::cout << "Logradouro: ";
 		std::getline(std::cin, logradouro);
+		} while (verifica_dados_endereco(logradouro) != 1);
+
 
 		std::string bairro;
 		do {
@@ -1177,9 +1225,12 @@ void crud_cliente(ControladorVenda cv, ControladorCliente cc, ControladorFuncion
 
 		//VERIFICA SE O CLIENTE EXISTE E INICIA A CAPTAÇÃO DOS NOVOS DADOS NO TECLADO
 		if(cc.idExiste(id)) {
-			std::cout << "Novo logradouro: ";
 			std::string logradouro;
+			do {
+			std::cout << "Logradouro: ";
 			std::getline(std::cin, logradouro);
+			} while (verifica_dados_endereco(logradouro) != 1);
+
 			
 			std::string bairro;
 			do {
@@ -1283,9 +1334,11 @@ void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFun
 	case 1: {
 		std::cout << "\nINSERIR NOVO FUNCIONARIO\n" << endl;
 		//PEGA OS DADOS DO CLIENTE DO TECLADO
-		std::cout << "Nome: ";
 		std::string nome;
+		do {
+		std::cout << "Nome: ";
 		std::getline(std::cin, nome);
+		} while (verifica_dados(nome) != 1);
 
 		std::cout << "CPF: ";
 		std::string cpfstr;
@@ -1320,13 +1373,19 @@ void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFun
 		std::string dtadmissao = ss.str();
 
 		//PEGA O ENDERECO DO CLIENTE
-		std::cout << "Logradouro: ";
 		std::string logradouro;
+		do {
+		std::cout << "Logradouro: ";
 		std::getline(std::cin, logradouro);
+		} while (verifica_dados_endereco(logradouro) != 1);
 
-		std::cout << "Bairro: ";
+
 		std::string bairro;
+		do {
+		std::cout << "Bairro: ";
 		std::getline(std::cin, bairro);
+		} while (verifica_dados_endereco(bairro) != 1);
+
 
 		std::cout << "Num: ";
 		int num;
@@ -1349,9 +1408,11 @@ void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFun
 
 		} while (num <= 0);
 
-		std::cout << "CEP: ";
 		std::string cep;
+		do {
+		std::cout << "CEP: ";
 		std::getline(std::cin, cep);
+		} while (verifica_cep(cep) != 1);
 
 		std::cout << "Complemento: ";
 		std::string comp;
@@ -1480,13 +1541,20 @@ void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFun
 
 		//VERIFICA SE O CLIENTE EXISTE E INICIA A CAPTAÇÃO DOS NOVOS DADOS NO TECLADO
 		if(cf.idExiste(id)) {
-			std::cout << "Novo logradouro: ";
+			
 			std::string logradouro;
+			do {
+			std::cout << "Novo logradouro: ";
 			std::getline(std::cin, logradouro);
+			} while (verifica_dados_endereco(logradouro) != 1);
 
-			std::cout << "Novo bairro: ";
+
 			std::string bairro;
+			do {
+			std::cout << "Novo bairro: ";
 			std::getline(std::cin, bairro);
+			} while (verifica_dados_endereco(bairro) != 1);
+
 
 			std::cout << "Novo numero: ";
 			int num;
@@ -1509,17 +1577,22 @@ void crud_funcionario(ControladorVenda cv, ControladorCliente cc, ControladorFun
 
 			} while (num <= 0);
 
-			std::cout << "Novo CEP: ";
 			std::string cep;
+			do {
+			std::cout << "Novo CEP: ";
 			std::getline(std::cin, cep);
+			} while (verifica_cep(cep) != 1);
 
 			std::cout << "Novo complemento: ";
 			std::string comp;
 			std::getline(std::cin, comp);
 
-			std::cout << "Nova cidade: ";
 			std::string cidade;
+			do {
+			std::cout << "Nova cidade: ";
 			std::getline(std::cin, cidade);
+			} while (verifica_dados_endereco(cidade) != 1);
+
 
 			//CRIA UM NOVO OBJETO CLIENTE
 			Endereco *end = new Endereco(logradouro, bairro, cep, stoi(numstr.c_str()), comp, cidade);

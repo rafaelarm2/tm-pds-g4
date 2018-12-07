@@ -1,6 +1,7 @@
 #include "Cliente.h"
 #include "Pessoa.h"
 #include <string>
+#include "excecoes.h"
 
 bool checa_data(std::string str){
     std::string::size_type sz;

@@ -11,10 +11,6 @@
 #include "VendaEntrega.h"
 
 TEST_CASE("01 - Testando a incializacao de um cliente pelo construtor") {
-    /*
-    Endereco(std::string logradouro, std::string bairro, std::string cep, int num,
-			std::string comp, std::string cidade);
-    */
     Endereco end_client1("Rua dos Caetes", "Bairro Jardim Canada", "30421546", 493, "Sem complemento", "Belo Horizonte");
     Cliente new_client1("Kelly Oubre", "43518535811", "kellyoubre@dc.wiz", end_client1, "33254819", "01/12/2018", "ouro");
     CHECK(new_client1.getCpf() == 43518535811);
@@ -63,11 +59,6 @@ TEST_CASE("2.2 - Testando a validade dos dados de um endereco") {
 TEST_CASE("2.3 - Testando a validade dos dados de um endereco") {
     CHECK_THROWS(new Endereco("Rua do Ouro", "Bairro Guaporel", "65984567", num, "Sem complemento", "Oakland"));
 }    
-
-/*
-Funcionario::Funcionario(std::string nome, std::string cpf, std::string email, Endereco endereco, 
-std::string tel, std::string dtadmissao):
-*/
                  
                  
 TEST_CASE("03 - Testando a incializacao de um funcionario pelo construtor") {

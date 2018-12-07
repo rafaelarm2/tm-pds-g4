@@ -1,11 +1,21 @@
 #include "Item.h"
 #include <string>
+#include "excecoes.h"
 
 using namespace std;
 
 Item::Item(Produto produto, int qtd) { // @suppress("Class members should be properly initialized")
-	this->produto = produto;
-	this->qtd = qtd;
+	if(num > 0)
+		this->produto = produto;
+	else 
+		throw InsercaoDeDadosIncorreta();
+	
+	if(qtd > 0)
+		this->qtd = qtd;
+	else 
+		throw InsercaoDeDadosIncorreta();
+	
+
 	this->vltotal = produto.getPreco() * qtd;
 }
 
